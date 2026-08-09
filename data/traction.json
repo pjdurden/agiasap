@@ -1,0 +1,14 @@
+{
+  "_comment": "Hand-maintained ledger. The page shows sums; this file shows the receipts. Every figure on the site must be derivable from here.",
+  "currency": "USD",
+  "committed": [
+    {
+      "date": "2026-08-09",
+      "amount": 0,
+      "source": "founder",
+      "note": "Nothing committed yet. This entry exists so the schema is legible before the first real one."
+    }
+  ],
+  "rounds": [],
+  "grants": []
+}

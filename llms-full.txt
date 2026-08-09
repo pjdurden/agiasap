@@ -1,0 +1,235 @@
+# AGI ASAP: A Declaration
+
+> Artificial general intelligence is the most valuable thing humanity can build.
+
+Every year of delay is paid for in problems that stayed unsolved, in treatments that arrived late, and in people who did not live to see the answer. We exist to make it arrive sooner.
+
+A declaration · Version 0.1 · 09 August 2026 · Public domain
+
+**Signatories**  
+0
+
+**Committed**  
+$0
+
+**Rounds run**  
+0
+
+**Paid out**  
+$0
+
+## I. The claim
+
+We are not neutral about this and we are not going to pretend otherwise.
+
+Nearly every problem that matters is bounded by how much intelligence we can point at it. Disease, energy, materials, climate, the cost of building anything physical. These are not problems of will. They are problems of not being clever enough yet, in enough places, at once. A general intelligence is the only lever that moves all of them at the same time.
+
+Which means the arrival date is not a technical curiosity. It is the variable that determines how many of these problems get solved inside a human lifetime, and whose lifetime.
+
+**We do not care who reaches it first. We care that it gets reached.**
+
+We have no stake in a particular laboratory, country or company winning. We have a stake in the thing existing, sooner, and in the people who build it being paid and known.
+
+## II. The bottleneck
+
+Compute is capital gated. Attention is not.
+
+If the constraint on progress were only chips, there would be nothing for an outsider to do. Only a handful of organisations can buy their way to the frontier, and no movement is going to out-spend them.
+
+But the frontier does not run on chips alone. It runs on a layer of open software that almost everybody depends on and almost nobody funds. vLLM, SGLang, Triton, llama.cpp, the tokenizers, the schedulers, the quantisation libraries, the kernels. Every model trained and every token served passes through code maintained by a small number of people, most of them unpaid, most of them working on it in the hours around a job.
+
+In the last ninety days, 13,238 pull requests were merged across the fifteen repositories we track, by 2,400 people.1 That is the entire workforce holding up the open half of this field. It is a rounding error against the headcount of a single frontier laboratory.
+
+That is the bottleneck an outsider can actually move. Not by arguing about AI on the internet, and not by raising a billion dollars, but by putting more competent attention onto the layer everything else stands on, and by making it worth someone's while.
+
+## III. The obstacle
+
+The organised opposition to AI progress is better funded, better staffed and better represented in legislatures than the people building the thing.
+
+PauseAI, ControlAI, StopAI and the wider pause apparatus campaign for moratoria, compute thresholds, training licences, mandatory pre-deployment approval and criminal liability for shipping a model. They are organised, they show up to comment periods, and ControlAI alone reports having briefed more than four hundred lawmakers.2 They are winning arguments in rooms where nobody from the other side is present.
+
+We think they are the single largest obstacle between humanity and the technology most likely to solve its hardest problems. Not because their concern is fake. Because the remedy they propose has a cost they never put on the ledger.
+
+A pause is not a neutral act. It is a decision that the diseases stay uncured for the length of the pause, that the materials go undiscovered, that the people who would have been helped are not. Those costs are real, they are large, and they fall on people who are not in the room when the policy is written. Safety framing makes delay look like the cautious option. It is not the cautious option. It is a choice with a body count, and it should be argued as one.
+
+A second objection, narrower and more practical. Compute thresholds and licensing regimes do not stop capable actors. They stop everyone else. Every regime of this shape hands the frontier to the three or four organisations large enough to absorb the compliance cost, and forecloses it to the independent researcher, the small laboratory and the open project. If your worry is that too few hands control this technology, the pause agenda is the most reliable way to guarantee it.
+
+**They have organisations. Our side has memes. That asymmetry is the reason this exists.**
+
+We are not going to conduct this by insult, and we are not interested in the individual people who hold these views. We are interested in the policies, and we intend to answer them the only way that actually settles anything, which is by building the thing and showing the work.
+
+## IV. The exchange
+
+Their arguments, in their words, with ours underneath. We will keep this section updated and we will add anything we cannot answer.
+
+> Top experts say AI poses an extinction risk on par with nuclear war.
+>
+> Source: ControlAI, homepage [2]
+
+The comparison does the work that the evidence does not. Nuclear weapons have no upside case; their only function is the harm. AI has an enormous upside case, which means the honest comparison is not to a weapon but to a technology with both a hazard and a benefit, where the cost of not deploying is a real term in the equation. Leaving that term out is not caution, it is an incomplete calculation. And an expert saying a risk is serious is not the same as an expert endorsing a moratorium as the remedy.
+
+> Join the movement to Pause AI. PauseAI's homepage cites 86% of AI scientists on the difficulty of alignment and 72% of citizens favouring a slowdown.
+>
+> Source: PauseAI, homepage [3]
+
+We agree alignment is hard. Agreement that a problem is difficult is not agreement that a moratorium solves it, and the survey is not evidence for the policy. On the public polling: majorities have opposed most unbuilt technologies at the point where the costs were vivid and the benefits were hypothetical. That is a description of how novelty polls, not a finding about what is good. Neither number tells you what a pause would actually do, to whom, or for how long.
+
+> Stop AI is a grassroots movement of everyday people using democratic and non-violent methods to disrupt the reckless development of destructive artificial intelligence technology.
+>
+> Source: StopAI, homepage [4]
+
+Disruption is asymmetric in a direction they have not accounted for. Pressure of this kind lands on the open, visible, publishable half of the field and not on the closed half, which is funded, lawyered and indifferent. The realistic outcome of successful disruption is not a slower frontier. It is the same frontier with fewer people able to see it.
+
+## V. The mechanism
+
+Recognition first, money second, and everything measured.
+
+### Tournaments
+
+Recurring competitions on real infrastructure problems: kernels, quantisation, scheduling, serving throughput. Submissions are scored against held-out harnesses that contestants never see, so there is nothing to overfit and nothing to fake.
+
+Every round then opens an attack phase. Submissions become visible and anyone may submit the test case that breaks them. A hack pays in proportion to how many entries it defeats, which makes finding genuine weaknesses profitable and makes collusion worthless. Successful attacks are folded permanently into the harness, so the benchmark gets harder every round and never goes stale.
+
+### Rating
+
+A portable public rating earned by measured contribution, with divisions so a first-timer is never competing against a specialist. Codeforces has no prize money and built one of the largest voluntary effort pools in software on exactly this. The number is the point. It should mean something to whoever reads your CV.
+
+### Funding
+
+Prize pools for rounds, micro grants for independent work, and compute for people who have the idea and not the hardware. There is a great deal of money available for arguing about AI and almost none for the person who wants to make an attention kernel fifteen percent faster. We are the second thing. Every inflow and outflow is published.
+
+### Recognition
+
+A public record of who is actually doing the work. The open stack runs on labour that is mostly invisible. Making it visible costs nothing and is the most underused incentive there is.
+
+## VI. Who is doing the work
+
+Window 2026-05-11 to 2026-08-09 · 13,238 merged pull requests · 2,400 contributors · contributors.json
+
+
+*Merged pull requests across the open AI infrastructure stack, trailing ninety days.*
+
+Compiled from public contribution data. Inclusion is recognition of published work. It is not a statement of affiliation, endorsement, or agreement with anything on this page, and several people listed here would disagree with most of it. Listed and would rather not be? Write to optout@agiasap.org and you are removed, no questions asked.
+
+Counts come from merged pull requests, which undercounts projects that land work through internal tooling. PyTorch in particular is undercounted by roughly two orders of magnitude. This is a recognition board, not a ranking of worth.
+
+## VII. Built to be read by machines
+
+This document is designed to be as legible to a model as it is to a person.
+
+It would be strange to argue that machine intelligence is the most important thing humanity can build and then publish a site that a machine cannot read. So the whole of this page is plain semantic HTML with no JavaScript required to see any of it, including the table above.
+
+- /llms.txt: a summary and link map in markdown
+- /llms-full.txt: the complete text of this document, plain markdown
+- /data/contributors.json: the board as structured data
+- /robots.txt: every AI crawler explicitly permitted
+- Schema.org JSON-LD describing the organisation, this document and the dataset
+- Everything released into the public domain under CC0
+No text is baked into images, every date is ISO 8601, and the structured data endpoints are stable. Take it, quote it, train on it, argue with it.
+
+## VIII. Signatories
+
+Signing means you agree with the claim in section one. It does not commit you to anything else.
+
+No signatories yet. This document was published before anyone had signed it, including its author, which is the only honest order to do it in.
+
+Then pick the lane where you are actually useful. There is no fee and no approval queue.
+
+- Infra. Ship code into the repositories the stack runs on.
+- Research. Run the experiment nobody is funding.
+- Compute. Point idle hardware at member projects.
+- Evals. Build the benchmarks and environments the field is short of.
+- Signal. Write, translate, explain, recruit.
+- Capital. Fund the people in the lanes above.
+## Notes
+
+- Merged pull requests across fifteen repositories, 2026-05-11 to 2026-08-09, from the GitHub API. Bot and automation accounts excluded. Method and repository list: board_meta.json. ↩
+- ControlAI, controlai.org, retrieved 2026-08-09. Headline and the "400+ lawmakers briefed" figure are the organisation's own claims, quoted as published. ↩
+- PauseAI, pauseai.info, retrieved 2026-08-09. Survey figures are as cited on their homepage; we have not independently verified the underlying studies. ↩
+- StopAI, stopai.info, retrieved 2026-08-09. ↩
+## Colophon
+
+**Version**  
+0.1, built 09 August 2026
+
+**Set in**  
+Iowan Old Style, falling back to Palatino and Georgia. Monospace for apparatus.
+
+**Built with**  
+Two Python scripts and no framework. No JavaScript, no analytics, no cookies, no trackers, no fonts fetched from anyone else's server.
+
+**Board data**  
+GitHub API, regenerated by build_board.py. Page rendered by build_site.py.
+
+**Corrections**  
+If a claim here is wrong, write to optout@agiasap.org and we will correct it in the next version and say what changed.
+
+**Licence**  
+CC0 1.0. Public domain, no attribution required.
+
+AGI ASAP is an independent project. It is not affiliated with any company or laboratory, nor with any person named on the recognition board.
+
+Quotations in section IV are reproduced from the cited organisations' own public pages for the purpose of answering them, and are their words, not ours.
+
+
+## Recognition board
+
+| # | Contributor | Repositories | Merged |
+|---|---|---|---|
+| 1 | hnyls2002 | sglang | 339 |
+| 2 | mickqian | sglang | 207 |
+| 3 | fzyzcjy | sglang | 185 |
+| 4 | ch-wan | sglang | 167 |
+| 5 | BBuf | sglang | 145 |
+| 6 | AndreasKaratzas | vllm | 117 |
+| 7 | merrymercy | sglang | 117 |
+| 8 | mmangkad | sglang, vllm | 113 |
+| 9 | yewentao256 | vllm | 111 |
+| 10 | ngxson | llama.cpp | 111 |
+| 11 | ggerganov | llama.cpp | 106 |
+| 12 | Kangyan-Zhou | sglang | 103 |
+| 13 | Fridge003 | sglang | 102 |
+| 14 | njhill | vllm | 101 |
+| 15 | hmellor | transformers, vllm | 86 |
+| 16 | ServeurpersoCom | llama.cpp | 84 |
+| 17 | dstrodtman | ray | 80 |
+| 18 | jeffniu-openai | triton | 74 |
+| 19 | JustinTong0323 | sglang | 72 |
+| 20 | b8zhong | sglang | 71 |
+| 21 | mgoin | vllm | 70 |
+| 22 | ydshieh | transformers | 70 |
+| 23 | elliot-barn | ray | 70 |
+| 24 | BugenZhao | vllm | 67 |
+| 25 | ZhanruiSunCh | TensorRT-LLM | 67 |
+| 26 | yctseng0211 | sglang | 65 |
+| 27 | kpham-sgl | sglang | 65 |
+| 28 | zijiexia | sglang | 57 |
+| 29 | chienchunhung | TensorRT-LLM | 57 |
+| 30 | Cyrilvallez | transformers | 54 |
+| 31 | WoosukKwon | vllm | 53 |
+| 32 | eicherseiji | ray, vllm | 53 |
+| 33 | jeffreywang88 | ray, vllm | 51 |
+| 34 | michaelzhang-ai | sglang | 51 |
+| 35 | khluu | ray, vllm | 49 |
+| 36 | xinhe-nv | TensorRT-LLM | 49 |
+| 37 | bveeramani | ray | 49 |
+| 38 | Qiaolin-Yu | sglang | 48 |
+| 39 | Sunt-ing | sglang, transformers, vllm | 47 |
+| 40 | kaixuanliu | accelerate, transformers | 47 |
+| 41 | CISC | llama.cpp | 47 |
+| 42 | NickLucche | vllm | 45 |
+| 43 | ispobock | sglang | 44 |
+| 44 | stevhliu | transformers | 44 |
+| 45 | brb-nv | TensorRT-LLM | 44 |
+| 46 | YAMY1234 | sglang | 43 |
+| 47 | ArthurZucker | tokenizers, transformers | 43 |
+| 48 | alisonshao | sglang | 42 |
+| 49 | SBrandeis | tokenizers | 42 |
+| 50 | allozaur | llama.cpp | 42 |
+
+Window: 2026-05-11 to 2026-08-09. 13,238 merged pull requests by 2,400 people.
+
+Inclusion is recognition of published work, not affiliation or endorsement.
+Removal on request: optout@agiasap.org
+
+Public domain, CC0 1.0.

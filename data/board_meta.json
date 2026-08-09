@@ -1,0 +1,25 @@
+{
+  "since": "2026-05-11",
+  "until": "2026-08-09",
+  "days": 90,
+  "total_prs": 13238,
+  "total_people": 2400,
+  "repos": [
+    "vllm-project/vllm",
+    "sgl-project/sglang",
+    "pytorch/pytorch",
+    "triton-lang/triton",
+    "huggingface/transformers",
+    "huggingface/tokenizers",
+    "huggingface/accelerate",
+    "ggml-org/llama.cpp",
+    "NVIDIA/TensorRT-LLM",
+    "deepspeedai/DeepSpeed",
+    "ray-project/ray",
+    "guidance-ai/llguidance",
+    "dottxt-ai/outlines-core",
+    "NVIDIA/kvpress",
+    "linkedin/Liger-Kernel"
+  ],
+  "skipped": []
+}

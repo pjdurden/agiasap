@@ -1,0 +1,2 @@
+# One GitHub login per line. Anyone listed here is excluded from the board.
+# Removals are honoured immediately and survive regeneration.

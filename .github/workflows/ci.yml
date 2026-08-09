@@ -1,0 +1,100 @@
+name: Validate
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate data files
+        run: python3 validate_data.py
+
+      # The anti-impersonation check. Anyone may open a PR, but you may only add
+      # yourself: a newly added signature file must be named for the PR author.
+      # Signing as someone else therefore requires their GitHub account.
+      #
+      # Skipped for the bot, which opens PRs from the issue form where the handle
+      # already came from the verified issue author.
+      - name: A signature must be your own
+        if: github.event.pull_request.user.login != 'github-actions[bot]'
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          python3 - <<'PY'
+          import os, subprocess, sys
+
+          author = os.environ["PR_AUTHOR"].lower()
+          base = os.environ["BASE_SHA"]
+
+          diff = subprocess.run(
+              ["git", "diff", "--name-status", base, "HEAD", "--", "data/signatures/"],
+              capture_output=True, text=True, check=True,
+          ).stdout.strip()
+
+          added, removed, other = [], [], []
+          for line in filter(None, diff.splitlines()):
+              status, path = line.split("\t", 1)
+              handle = path.rsplit("/", 1)[-1].removesuffix(".json").lower()
+              if handle in ("", ".gitkeep"):
+                  continue
+              (added if status == "A" else removed if status == "D" else other).append(handle)
+
+          # Removals need no permission at all. Getting off this list must never
+          # require proving who you are.
+          if removed:
+              print(f"removals (always allowed): {', '.join(removed)}")
+          if other:
+              print(f"::error::modifies existing signature(s): {', '.join(other)}. "
+                    "Open a fresh PR that removes and re-adds instead.")
+              sys.exit(1)
+          if not added:
+              print("no new signatures in this PR")
+              sys.exit(0)
+          if len(added) > 1:
+              print(f"::error::adds {len(added)} signatures. One per pull request please.")
+              sys.exit(1)
+          if added[0] != author:
+              print(f"::error::PR author is @{author} but the signature is for @{added[0]}. "
+                    "You may only sign for yourself.")
+              sys.exit(1)
+
+          print(f"@{added[0]} is signing for themselves")
+          PY
+
+      - name: Build the site
+        run: |
+          # The board is a separate job; keep the last committed data so the
+          # build is exercised end to end on every PR.
+          python3 build_site.py
+
+      - name: No JavaScript may enter the page
+        run: |
+          if grep -o '<script[^>]*>' index.html | grep -v 'application/ld+json'; then
+            echo "::error::index.html contains executable JavaScript. The page must render without it."
+            exit 1
+          fi
+          echo "clean: only JSON-LD present"
+
+      - name: No em dashes
+        run: |
+          if grep -q '—' index.html llms.txt llms-full.txt; then
+            grep -n '—' index.html llms.txt llms-full.txt || true
+            echo "::error::Em dash found in published output."
+            exit 1
+          fi
+          echo "clean"

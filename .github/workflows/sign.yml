@@ -1,0 +1,134 @@
+name: Signature request
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  open-pr:
+    if: contains(github.event.issue.labels.*.name, 'signature')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build the signature file
+        id: sig
+        env:
+          # The handle comes from the issue author, never from the form body.
+          # This is what makes signing as someone else impossible rather than
+          # merely discouraged.
+          AUTHOR: ${{ github.event.issue.user.login }}
+          BODY: ${{ github.event.issue.body }}
+        run: |
+          python3 - <<'PY'
+          import datetime, json, os, pathlib, re, sys
+
+          author = os.environ["AUTHOR"]
+          body = os.environ["BODY"] or ""
+
+          # GitHub issue forms render as "### Label\n\nvalue\n\n### Label\n\nvalue".
+          fields = {}
+          for label, value in re.findall(r"^###\s+(.+?)\s*\n+(.*?)(?=\n###\s|\Z)", body, re.S | re.M):
+              fields[label.strip().lower()] = value.strip()
+
+          def get(*names):
+              for n in names:
+                  v = fields.get(n, "")
+                  if v and v.lower() not in ("_no response_", "none", "n/a"):
+                      return v
+              return ""
+
+          name = get("name") or author
+          lane = get("lane").lower()
+          affiliation = get("affiliation (optional)", "affiliation")
+          url = get("link (optional)", "link", "url")
+
+          LANES = {"infra", "research", "compute", "evals", "signal", "capital"}
+          if lane not in LANES:
+              print(f"::error::lane {lane!r} is not one of {sorted(LANES)}")
+              sys.exit(1)
+          if len(name) > 80:
+              print("::error::name is longer than 80 characters")
+              sys.exit(1)
+          if url and not url.startswith("https://"):
+              print("::error::link must start with https://")
+              sys.exit(1)
+          if affiliation and len(affiliation) > 60:
+              print("::error::affiliation is longer than 60 characters")
+              sys.exit(1)
+
+          path = pathlib.Path("data/signatures") / f"{author.lower()}.json"
+          if path.exists():
+              print(f"::error::{author} has already signed")
+              sys.exit(1)
+
+          record = {
+              "name": name,
+              "github": author,
+              "lane": lane,
+              "signed": datetime.date.today().isoformat(),
+          }
+          if affiliation:
+              record["affiliation"] = affiliation
+          if url:
+              record["url"] = url
+
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(record, indent=2) + "\n")
+          print(f"wrote {path}")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"path={path}\n")
+              f.write(f"handle={author}\n")
+          PY
+
+      - name: Validate before proposing
+        run: python3 validate_data.py
+
+      - name: Open the pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HANDLE: ${{ steps.sig.outputs.handle }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          BRANCH="sign/${HANDLE,,}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add data/signatures/
+          git commit -m "sign: @${HANDLE}"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "sign: @${HANDLE}" \
+            --body "Signature requested by @${HANDLE} in #${ISSUE}.
+
+          Handle taken from the issue author, not from the form body.
+
+          Closes #${ISSUE}" \
+            --base main --head "$BRANCH"
+
+      - name: Tell them what happened
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE" --body "Thanks. A pull request with your signature is open and will be merged shortly. It will appear on the site at the next build.
+
+          Changed your mind at any point? Say so here or open a pull request deleting your file. Removals are never questioned."
+
+      - name: Report failure on the issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE" --body "Something in that submission did not validate, so no pull request was opened. See the run log for the specific reason: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

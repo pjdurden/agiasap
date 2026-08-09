@@ -1,0 +1,69 @@
+name: Sign the declaration
+description: Add your name to the signatories. Takes about thirty seconds.
+title: "sign"
+labels: ["signature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Signing means you agree with the claim in section I of the declaration.
+        It does not commit you to anything else: not to a lane, not to money, and
+        not to any position taken in section III or IV.
+
+        Your GitHub username is taken from this issue automatically, so you cannot
+        sign as anyone else and you do not need to type it. A pull request will be
+        opened for you within a minute or so.
+
+        This list is public. You can be removed at any time, without giving a reason.
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: However you want to be listed. A handle is fine.
+      placeholder: Ada Lovelace
+    validations:
+      required: true
+
+  - type: dropdown
+    id: lane
+    attributes:
+      label: Lane
+      description: Where you are actually useful. You are not committing to anything by picking one.
+      options:
+        - infra
+        - research
+        - compute
+        - evals
+        - signal
+        - capital
+    validations:
+      required: true
+
+  - type: input
+    id: affiliation
+    attributes:
+      label: Affiliation (optional)
+      description: >
+        Leave blank unless you are comfortable with this reading as your employer's
+        position to someone skimming, because it will. "independent" is a good answer.
+      placeholder: independent
+    validations:
+      required: false
+
+  - type: input
+    id: url
+    attributes:
+      label: Link (optional)
+      description: Your site or profile. Must start with https://
+      placeholder: https://example.org
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: I agree with the claim in section I, and I am signing for myself.
+          required: true

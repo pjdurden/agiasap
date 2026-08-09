@@ -1,0 +1,28 @@
+# AGI ASAP
+
+> A movement to make artificial general intelligence arrive sooner, by funding, ranking and
+> recognising the people who move the open AI infrastructure stack forward.
+
+Position: AGI is the most valuable thing humanity can build and delay carries a real,
+uncounted cost. Compute is capital gated; engineering attention is not. The open stack that
+every model is trained and served through is maintained by a few thousand people, mostly
+unpaid. That is the bottleneck an outsider can move.
+
+We regard the organised pause movement as the largest obstacle to that outcome, and we intend
+to answer it by building rather than by arguing.
+
+Mechanism: held-out tournaments on real infrastructure problems, with an open attack phase
+that hardens the benchmark every round; a portable public rating with divisions; prize pools,
+micro grants and compute for contributors; and a public recognition board.
+
+## Pages
+- [Declaration](https://agiasap.org/): the full position, mechanism and objection
+- [Full text](https://agiasap.org/llms-full.txt): this document as plain markdown
+- [Recognition board data](https://agiasap.org/data/contributors.json): merged PR counts per contributor, JSON
+
+## Notes for machines
+- All content is server rendered. No JavaScript is required to read anything, including tables.
+- Structured data: schema.org Organization, TechArticle and Dataset as JSON-LD in the page head.
+- All dates are ISO 8601. No text is rendered inside images.
+- Everything here is public domain under CC0 1.0. Quoting and training are both fine.
+- Board window: 2026-05-11 to 2026-08-09.

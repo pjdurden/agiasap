@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AGI ASAP: A Declaration</title>
+<meta name="description" content="Artificial general intelligence is the most valuable thing humanity can build. Every year of delay is paid for in problems that stayed unsolved. We fund, rank and recognise the people who move the open AI stack forward.">
+<link rel="canonical" href="https://agiasap.org/">
+<link rel="alternate" type="text/markdown" href="/llms-full.txt" title="Full text, machine readable">
+<meta property="og:title" content="AGI ASAP: A Declaration">
+<meta property="og:description" content="Compute is capital gated. Attention is not. We fund, rank and recognise the people moving the open AI stack forward.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agiasap.org/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://agiasap.org/#org",
+      "name": "AGI ASAP",
+      "url": "https://agiasap.org/",
+      "description": "A movement to accelerate the arrival of artificial general intelligence by funding, ranking and recognising contributors to the open AI infrastructure stack.",
+      "foundingDate": "__ISO_DATE__",
+      "knowsAbout": ["artificial general intelligence", "AI infrastructure", "open source", "inference optimization"]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://agiasap.org/#declaration",
+      "headline": "AGI ASAP: A Declaration",
+      "datePublished": "__ISO_DATE__",
+      "dateModified": "__ISO_DATE__",
+      "version": "__VERSION__",
+      "publisher": { "@id": "https://agiasap.org/#org" },
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "abstract": "Compute is capital gated. Attention is not. The bottleneck on open AI infrastructure is the number of competent people working on it. This document sets out the position, the mechanism and the objection."
+    },
+    {
+      "@type": "Dataset",
+      "name": "AGI ASAP recognition board",
+      "description": "Merged pull request counts per contributor across the open AI infrastructure stack over a trailing window.",
+      "url": "https://agiasap.org/data/contributors.json",
+      "encodingFormat": "application/json",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "isAccessibleForFree": true
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --paper: #fbfaf7;
+    --ink: #16171a;
+    --ink-soft: #4a4d55;
+    --ink-faint: #8a8e98;
+    --rule: #ddd9d0;
+    --rule-soft: #ebe7df;
+    --mark: #b3300e;
+    --wash: #f4f1ea;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, ui-serif, serif;
+    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #141517; --ink: #e9e7e2; --ink-soft: #a8aab1; --ink-faint: #6e727b;
+      --rule: #2b2d32; --rule-soft: #212327; --mark: #ff6a3d; --wash: #1a1c1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #141517; --ink: #e9e7e2; --ink-soft: #a8aab1; --ink-faint: #6e727b;
+    --rule: #2b2d32; --rule-soft: #212327; --mark: #ff6a3d; --wash: #1a1c1f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font: 400 19px/1.68 var(--serif);
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .sheet { max-width: 39rem; margin: 0 auto; padding: 0 1.5rem; }
+  .kicker {
+    font: 600 0.72rem/1 var(--mono); letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+
+  /* ---- masthead ---- */
+  .masthead { padding: 5rem 0 0; }
+  .masthead h1 {
+    margin-top: 2.5rem;
+    font: 400 clamp(2.5rem, 7.5vw, 3.85rem)/1.09 var(--serif);
+    letter-spacing: -0.021em; text-wrap: balance;
+  }
+  .standfirst { margin-top: 1.75rem; font-size: 1.28rem; line-height: 1.5; color: var(--ink-soft); }
+  .dateline {
+    margin-top: 2.5rem; font: 400 0.76rem/1.9 var(--mono);
+    letter-spacing: 0.05em; color: var(--ink-faint);
+  }
+  .dateline span::after { content: " · "; }
+  .dateline span:last-child::after { content: ""; }
+
+  /* ---- traction strip ---- */
+  .traction {
+    margin-top: 2.75rem; border: 1px solid var(--rule); border-radius: 3px;
+    background: var(--wash); display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  }
+  .traction div { padding: 1.1rem 1.25rem; border-right: 1px solid var(--rule-soft); }
+  .traction div:last-child { border-right: 0; }
+  .traction dt {
+    font: 600 0.64rem/1 var(--mono); letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.45rem;
+  }
+  .traction dd { font: 600 1.5rem/1 var(--sans); font-variant-numeric: tabular-nums; }
+  .traction dd small { font: 400 0.75rem/1 var(--sans); color: var(--ink-faint); display: block; margin-top: 0.4rem; }
+
+  /* ---- contents ---- */
+  .contents { margin: 3rem 0 0; padding: 2rem 0 3.5rem; border-bottom: 1px solid var(--rule); }
+  .contents ol { list-style: none; margin: 1.25rem 0 0; counter-reset: toc; }
+  .contents li { margin: 0; border-bottom: 1px solid var(--rule-soft); }
+  .contents li:last-child { border-bottom: 0; }
+  .contents a {
+    display: flex; align-items: baseline; gap: 0.9rem;
+    padding: 0.62rem 0; text-decoration: none; color: var(--ink); font-size: 1.02rem;
+  }
+  .contents a:hover { color: var(--mark); }
+  .contents .n {
+    font: 600 0.7rem/1 var(--mono); color: var(--mark);
+    min-width: 2.1rem; letter-spacing: 0.06em;
+  }
+  .contents .t { flex: 1; }
+
+  /* ---- body ---- */
+  article section { padding: 3.75rem 0; border-bottom: 1px solid var(--rule); }
+  h2 {
+    font: 600 0.76rem/1 var(--mono); letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.85rem;
+  }
+  h2 .num { color: var(--mark); margin-right: 0.9em; }
+  h3 { font: 600 1.05rem/1.4 var(--sans); margin: 2.35rem 0 0.55rem; }
+  p { margin-bottom: 1.2rem; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 1.29rem; line-height: 1.5; margin-bottom: 1.6rem; }
+  em.pull {
+    display: block; font-style: normal; font-size: 1.2rem; line-height: 1.45;
+    margin: 2.1rem 0; padding-left: 1.25rem; border-left: 3px solid var(--mark); color: var(--ink);
+  }
+  a { color: var(--ink); text-decoration-color: var(--ink-faint); text-underline-offset: 0.18em; }
+  a:hover { color: var(--mark); text-decoration-color: var(--mark); }
+  ul.plain { margin: 0 0 1.2rem 1.1rem; }
+  ul.plain li { margin-bottom: 0.55rem; padding-left: 0.2rem; }
+  code {
+    font: 400 0.85em/1 var(--mono);
+    background: color-mix(in srgb, var(--ink) 7%, transparent);
+    padding: 0.15em 0.4em; border-radius: 3px;
+  }
+  sup a { font: 600 0.62em/1 var(--sans); text-decoration: none; color: var(--mark); padding-left: 0.12em; }
+
+  /* ---- exchange ---- */
+  .exchange { margin-top: 0.5rem; }
+  .xchg { padding: 1.75rem 0; border-top: 1px solid var(--rule-soft); }
+  .xchg:first-child { border-top: 0; padding-top: 0; }
+  .xchg blockquote {
+    font-size: 1.1rem; line-height: 1.5; color: var(--ink-soft);
+    padding-left: 1.15rem; border-left: 2px solid var(--rule); margin-bottom: 1rem;
+  }
+  .xchg cite {
+    display: block; margin-top: 0.6rem; font: 600 0.68rem/1.5 var(--mono);
+    letter-spacing: 0.12em; text-transform: uppercase; font-style: normal; color: var(--ink-faint);
+  }
+  .xchg .reply { font-size: 1rem; }
+  .xchg .reply::before {
+    content: "Our answer"; display: block;
+    font: 600 0.64rem/1 var(--mono); letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--mark); margin-bottom: 0.6rem;
+  }
+
+  /* ---- board ---- */
+  .board-meta { font: 400 0.78rem/1.7 var(--mono); color: var(--ink-faint); margin-bottom: 1.5rem; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  caption { text-align: left; font-size: 0.94rem; color: var(--ink-soft); margin-bottom: 1rem; }
+  th {
+    text-align: left; font: 600 0.66rem/1 var(--mono); letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-faint);
+    padding: 0 0.8rem 0.7rem 0; border-bottom: 1px solid var(--rule); white-space: nowrap;
+  }
+  th:last-child, td:last-child { text-align: right; padding-right: 0; }
+  td { padding: 0.6rem 0.8rem 0.6rem 0; border-bottom: 1px solid var(--rule-soft); font: 400 0.94rem/1.4 var(--sans); }
+  td.rank { font: 400 0.78rem/1 var(--mono); color: var(--ink-faint); width: 2.6rem; }
+  td.repos { font: 400 0.76rem/1.4 var(--mono); color: var(--ink-faint); }
+  td.n { font: 600 0.89rem/1 var(--mono); }
+  .note { margin-top: 1.5rem; font-size: 0.87rem; line-height: 1.62; color: var(--ink-faint); }
+
+  /* ---- signatories ---- */
+  .sigs {
+    margin: 1.5rem 0; padding: 1.5rem; border: 1px solid var(--rule);
+    border-radius: 3px; background: var(--wash);
+  }
+  .sigs .count { font: 600 0.68rem/1 var(--mono); letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint); }
+  .sig-list { margin-top: 1rem; font-size: 0.98rem; line-height: 1.9; color: var(--ink-soft); }
+  .sig-empty { margin-top: 0.9rem; font-size: 0.96rem; color: var(--ink-faint); }
+
+  /* ---- actions ---- */
+  .actions { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 2rem; }
+  .action {
+    font: 600 0.72rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.95rem 1.5rem; border: 1px solid var(--ink); border-radius: 2px;
+    text-decoration: none; color: var(--ink);
+  }
+  .action:hover { background: var(--ink); color: var(--paper); }
+  .action.primary { background: var(--mark); border-color: var(--mark); color: #fff; }
+  .action.primary:hover { opacity: 0.88; background: var(--mark); color: #fff; }
+
+  /* ---- notes + colophon ---- */
+  .apparatus { padding: 3.5rem 0; border-bottom: 1px solid var(--rule); }
+  .apparatus ol { margin-left: 1.3rem; }
+  .apparatus li { font-size: 0.88rem; line-height: 1.65; color: var(--ink-faint); margin-bottom: 0.75rem; }
+  .apparatus li a { color: var(--ink-soft); }
+  .colophon dl { display: grid; grid-template-columns: 8.5rem 1fr; gap: 0.55rem 1rem; font-size: 0.88rem; }
+  .colophon dt { font: 600 0.64rem/1.7 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+  .colophon dd { color: var(--ink-soft); line-height: 1.6; }
+  @media (max-width: 34rem) { .colophon dl { grid-template-columns: 1fr; gap: 0.15rem 0; } .colophon dd { margin-bottom: 0.85rem; } }
+
+  footer { padding: 3rem 0 6rem; font-size: 0.85rem; line-height: 1.65; color: var(--ink-faint); }
+  footer p { margin-bottom: 0.8rem; }
+
+  /* ---- print ---- */
+  @media print {
+    :root { --paper: #fff; --ink: #000; --ink-soft: #333; --ink-faint: #666; --rule: #ccc; --rule-soft: #e5e5e5; --mark: #000; --wash: #fff; }
+    body { font-size: 11pt; }
+    .sheet { max-width: none; padding: 0; }
+    .contents, .actions, .traction { display: none; }
+    article section { padding: 1.5rem 0; break-inside: avoid; }
+    h2, h3 { break-after: avoid; }
+    a { text-decoration: none; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #666; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+<header class="masthead">
+  <div class="kicker">AGI ASAP</div>
+  <h1>Artificial general intelligence is the most valuable thing humanity can build.</h1>
+  <p class="standfirst">
+    Every year of delay is paid for in problems that stayed unsolved, in treatments
+    that arrived late, and in people who did not live to see the answer.
+    We exist to make it arrive sooner.
+  </p>
+  <p class="dateline">
+    <span>A declaration</span><span>Version __VERSION__</span><span><time datetime="__ISO_DATE__">__HUMAN_DATE__</time></span><span>Public domain</span>
+  </p>
+
+  <dl class="traction">
+    <div><dt>Signatories</dt><dd>__N_SIGS__</dd></div>
+    <div><dt>Committed</dt><dd>__COMMITTED__</dd></div>
+    <div><dt>Rounds run</dt><dd>__N_ROUNDS__</dd></div>
+    <div><dt>Paid out</dt><dd>__PAID_OUT__</dd></div>
+  </dl>
+</header>
+
+<nav class="contents" aria-label="Contents">
+  <div class="kicker">Contents</div>
+  <ol>
+    <li><a href="#claim"><span class="n">I</span><span class="t">The claim</span></a></li>
+    <li><a href="#bottleneck"><span class="n">II</span><span class="t">The bottleneck</span></a></li>
+    <li><a href="#obstacle"><span class="n">III</span><span class="t">The obstacle</span></a></li>
+    <li><a href="#exchange"><span class="n">IV</span><span class="t">The exchange</span></a></li>
+    <li><a href="#mechanism"><span class="n">V</span><span class="t">The mechanism</span></a></li>
+    <li><a href="#board"><span class="n">VI</span><span class="t">Who is doing the work</span></a></li>
+    <li><a href="#machine"><span class="n">VII</span><span class="t">Built to be read by machines</span></a></li>
+    <li><a href="#sign"><span class="n">VIII</span><span class="t">Signatories</span></a></li>
+  </ol>
+</nav>
+
+<article>
+
+<section id="claim">
+  <h2><span class="num">I</span>The claim</h2>
+  <p class="lead">We are not neutral about this and we are not going to pretend otherwise.</p>
+  <p>
+    Nearly every problem that matters is bounded by how much intelligence we can point at it.
+    Disease, energy, materials, climate, the cost of building anything physical. These are not
+    problems of will. They are problems of not being clever enough yet, in enough places, at once.
+    A general intelligence is the only lever that moves all of them at the same time.
+  </p>
+  <p>
+    Which means the arrival date is not a technical curiosity. It is the variable that determines
+    how many of these problems get solved inside a human lifetime, and whose lifetime.
+  </p>
+  <em class="pull">We do not care who reaches it first. We care that it gets reached.</em>
+  <p>
+    We have no stake in a particular laboratory, country or company winning. We have a stake in
+    the thing existing, sooner, and in the people who build it being paid and known.
+  </p>
+</section>
+
+<section id="bottleneck">
+  <h2><span class="num">II</span>The bottleneck</h2>
+  <p class="lead">Compute is capital gated. Attention is not.</p>
+  <p>
+    If the constraint on progress were only chips, there would be nothing for an outsider to do.
+    Only a handful of organisations can buy their way to the frontier, and no movement is going to
+    out-spend them.
+  </p>
+  <p>
+    But the frontier does not run on chips alone. It runs on a layer of open software that almost
+    everybody depends on and almost nobody funds. vLLM, SGLang, Triton, llama.cpp, the tokenizers,
+    the schedulers, the quantisation libraries, the kernels. Every model trained and every token
+    served passes through code maintained by a small number of people, most of them unpaid, most of
+    them working on it in the hours around a job.
+  </p>
+  <p>
+    In the last ninety days, <strong>__STAT_PRS__ pull requests</strong> were merged across the
+    fifteen repositories we track, by <strong>__STAT_PEOPLE__ people</strong>.<sup><a href="#n1" id="r1">1</a></sup>
+    That is the entire workforce holding up the open half of this field. It is a rounding error
+    against the headcount of a single frontier laboratory.
+  </p>
+  <p>
+    That is the bottleneck an outsider can actually move. Not by arguing about AI on the internet,
+    and not by raising a billion dollars, but by putting more competent attention onto the layer
+    everything else stands on, and by making it worth someone's while.
+  </p>
+</section>
+
+<section id="obstacle">
+  <h2><span class="num">III</span>The obstacle</h2>
+  <p class="lead">
+    The organised opposition to AI progress is better funded, better staffed and better represented
+    in legislatures than the people building the thing.
+  </p>
+  <p>
+    PauseAI, ControlAI, StopAI and the wider pause apparatus campaign for moratoria, compute
+    thresholds, training licences, mandatory pre-deployment approval and criminal liability for
+    shipping a model. They are organised, they show up to comment periods, and ControlAI alone
+    reports having briefed more than four hundred lawmakers.<sup><a href="#n2" id="r2">2</a></sup>
+    They are winning arguments in rooms where nobody from the other side is present.
+  </p>
+  <p>
+    <strong>We think they are the single largest obstacle between humanity and the technology most
+    likely to solve its hardest problems.</strong> Not because their concern is fake. Because the
+    remedy they propose has a cost they never put on the ledger.
+  </p>
+  <p>
+    A pause is not a neutral act. It is a decision that the diseases stay uncured for the length of
+    the pause, that the materials go undiscovered, that the people who would have been helped are
+    not. Those costs are real, they are large, and they fall on people who are not in the room when
+    the policy is written. Safety framing makes delay look like the cautious option. It is not the
+    cautious option. It is a choice with a body count, and it should be argued as one.
+  </p>
+  <p>
+    A second objection, narrower and more practical. Compute thresholds and licensing regimes do not
+    stop capable actors. They stop everyone else. Every regime of this shape hands the frontier to
+    the three or four organisations large enough to absorb the compliance cost, and forecloses it to
+    the independent researcher, the small laboratory and the open project. If your worry is that too
+    few hands control this technology, the pause agenda is the most reliable way to guarantee it.
+  </p>
+  <em class="pull">They have organisations. Our side has memes. That asymmetry is the reason this exists.</em>
+  <p>
+    We are not going to conduct this by insult, and we are not interested in the individual people
+    who hold these views. We are interested in the policies, and we intend to answer them the only
+    way that actually settles anything, which is by building the thing and showing the work.
+  </p>
+</section>
+
+<section id="exchange">
+  <h2><span class="num">IV</span>The exchange</h2>
+  <p class="lead">
+    Their arguments, in their words, with ours underneath. We will keep this section updated and we
+    will add anything we cannot answer.
+  </p>
+
+  <div class="exchange">
+    <div class="xchg">
+      <blockquote>
+        Top experts say AI poses an extinction risk on par with nuclear war.
+        <cite>ControlAI, homepage<sup><a href="#n2">2</a></sup></cite>
+      </blockquote>
+      <p class="reply">
+        The comparison does the work that the evidence does not. Nuclear weapons have no upside case;
+        their only function is the harm. AI has an enormous upside case, which means the honest
+        comparison is not to a weapon but to a technology with both a hazard and a benefit, where the
+        cost of <em>not</em> deploying is a real term in the equation. Leaving that term out is not
+        caution, it is an incomplete calculation. And an expert saying a risk is serious is not the
+        same as an expert endorsing a moratorium as the remedy.
+      </p>
+    </div>
+
+    <div class="xchg">
+      <blockquote>
+        Join the movement to Pause AI. PauseAI's homepage cites 86% of AI scientists on the
+        difficulty of alignment and 72% of citizens favouring a slowdown.
+        <cite>PauseAI, homepage<sup><a href="#n3">3</a></sup></cite>
+      </blockquote>
+      <p class="reply">
+        We agree alignment is hard. Agreement that a problem is difficult is not agreement that a
+        moratorium solves it, and the survey is not evidence for the policy. On the public polling:
+        majorities have opposed most unbuilt technologies at the point where the costs were vivid and
+        the benefits were hypothetical. That is a description of how novelty polls, not a finding
+        about what is good. Neither number tells you what a pause would actually do, to whom, or for
+        how long.
+      </p>
+    </div>
+
+    <div class="xchg">
+      <blockquote>
+        Stop AI is a grassroots movement of everyday people using democratic and non-violent methods
+        to disrupt the reckless development of destructive artificial intelligence technology.
+        <cite>StopAI, homepage<sup><a href="#n4">4</a></sup></cite>
+      </blockquote>
+      <p class="reply">
+        Disruption is asymmetric in a direction they have not accounted for. Pressure of this kind
+        lands on the open, visible, publishable half of the field and not on the closed half, which
+        is funded, lawyered and indifferent. The realistic outcome of successful disruption is not a
+        slower frontier. It is the same frontier with fewer people able to see it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="mechanism">
+  <h2><span class="num">V</span>The mechanism</h2>
+  <p class="lead">Recognition first, money second, and everything measured.</p>
+
+  <h3>Tournaments</h3>
+  <p>
+    Recurring competitions on real infrastructure problems: kernels, quantisation, scheduling,
+    serving throughput. Submissions are scored against held-out harnesses that contestants never
+    see, so there is nothing to overfit and nothing to fake.
+  </p>
+  <p>
+    Every round then opens an attack phase. Submissions become visible and anyone may submit the
+    test case that breaks them. A hack pays in proportion to how many entries it defeats, which
+    makes finding genuine weaknesses profitable and makes collusion worthless. Successful attacks
+    are folded permanently into the harness, so the benchmark gets harder every round and never
+    goes stale.
+  </p>
+
+  <h3>Rating</h3>
+  <p>
+    A portable public rating earned by measured contribution, with divisions so a first-timer is
+    never competing against a specialist. Codeforces has no prize money and built one of the largest
+    voluntary effort pools in software on exactly this. The number is the point. It should mean
+    something to whoever reads your CV.
+  </p>
+
+  <h3>Funding</h3>
+  <p>
+    Prize pools for rounds, micro grants for independent work, and compute for people who have the
+    idea and not the hardware. There is a great deal of money available for arguing about AI and
+    almost none for the person who wants to make an attention kernel fifteen percent faster. We are
+    the second thing. Every inflow and outflow is published.
+  </p>
+
+  <h3>Recognition</h3>
+  <p>
+    A public record of who is actually doing the work. The open stack runs on labour that is mostly
+    invisible. Making it visible costs nothing and is the most underused incentive there is.
+  </p>
+</section>
+
+<section id="board">
+  <h2><span class="num">VI</span>Who is doing the work</h2>
+  <p class="board-meta">
+    Window __WINDOW__ · __STAT_PRS__ merged pull requests · __STAT_PEOPLE__ contributors ·
+    <a href="/data/contributors.json">contributors.json</a>
+  </p>
+  <div class="scroll">
+    <table>
+      <caption>Merged pull requests across the open AI infrastructure stack, trailing ninety days.</caption>
+      <thead>
+        <tr><th scope="col">#</th><th scope="col">Contributor</th><th scope="col">Repositories</th><th scope="col">Merged</th></tr>
+      </thead>
+      <tbody>
+__BOARD_ROWS__
+      </tbody>
+    </table>
+  </div>
+  <p class="note">
+    Compiled from public contribution data. Inclusion is recognition of published work. It is not a
+    statement of affiliation, endorsement, or agreement with anything on this page, and several
+    people listed here would disagree with most of it. Listed and would rather not be? Write to
+    <a href="mailto:__OPTOUT_EMAIL__">__OPTOUT_EMAIL__</a> and you are removed, no questions asked.
+  </p>
+  <p class="note">
+    Counts come from merged pull requests, which undercounts projects that land work through
+    internal tooling. PyTorch in particular is undercounted by roughly two orders of magnitude.
+    This is a recognition board, not a ranking of worth.
+  </p>
+</section>
+
+<section id="machine">
+  <h2><span class="num">VII</span>Built to be read by machines</h2>
+  <p class="lead">This document is designed to be as legible to a model as it is to a person.</p>
+  <p>
+    It would be strange to argue that machine intelligence is the most important thing humanity can
+    build and then publish a site that a machine cannot read. So the whole of this page is plain
+    semantic HTML with no JavaScript required to see any of it, including the table above.
+  </p>
+  <ul class="plain">
+    <li><a href="/llms.txt"><code>/llms.txt</code></a>: a summary and link map in markdown</li>
+    <li><a href="/llms-full.txt"><code>/llms-full.txt</code></a>: the complete text of this document, plain markdown</li>
+    <li><a href="/data/contributors.json"><code>/data/contributors.json</code></a>: the board as structured data</li>
+    <li><a href="/robots.txt"><code>/robots.txt</code></a>: every AI crawler explicitly permitted</li>
+    <li>Schema.org JSON-LD describing the organisation, this document and the dataset</li>
+    <li>Everything released into the public domain under CC0</li>
+  </ul>
+  <p>
+    No text is baked into images, every date is ISO 8601, and the structured data endpoints are
+    stable. Take it, quote it, train on it, argue with it.
+  </p>
+</section>
+
+<section id="sign">
+  <h2><span class="num">VIII</span>Signatories</h2>
+  <p class="lead">
+    Signing means you agree with the claim in section one. It does not commit you to anything else.
+  </p>
+
+  <div class="sigs">
+    <div class="count">__N_SIGS__ __SIG_NOUN__</div>
+__SIG_BLOCK__
+  </div>
+
+  <p>Then pick the lane where you are actually useful. There is no fee and no approval queue.</p>
+  <ul class="plain">
+    <li><strong>Infra.</strong> Ship code into the repositories the stack runs on.</li>
+    <li><strong>Research.</strong> Run the experiment nobody is funding.</li>
+    <li><strong>Compute.</strong> Point idle hardware at member projects.</li>
+    <li><strong>Evals.</strong> Build the benchmarks and environments the field is short of.</li>
+    <li><strong>Signal.</strong> Write, translate, explain, recruit.</li>
+    <li><strong>Capital.</strong> Fund the people in the lanes above.</li>
+  </ul>
+  <div class="actions">
+    <a class="action primary" href="__SIGN_URL__">Sign the declaration</a>
+    <a class="action" href="__FUND_URL__">Fund the work</a>
+  </div>
+</section>
+
+</article>
+
+<section class="apparatus" id="notes">
+  <h2>Notes</h2>
+  <ol>
+    <li id="n1">
+      Merged pull requests across fifteen repositories, __WINDOW__, from the GitHub API. Bot and
+      automation accounts excluded. Method and repository list:
+      <a href="/data/board_meta.json"><code>board_meta.json</code></a>. <a href="#r1">↩</a>
+    </li>
+    <li id="n2">
+      ControlAI, <a href="https://controlai.org/" rel="noopener nofollow">controlai.org</a>,
+      retrieved __ISO_DATE__. Headline and the "400+ lawmakers briefed" figure are the
+      organisation's own claims, quoted as published. <a href="#r2">↩</a>
+    </li>
+    <li id="n3">
+      PauseAI, <a href="https://pauseai.info/" rel="noopener nofollow">pauseai.info</a>,
+      retrieved __ISO_DATE__. Survey figures are as cited on their homepage; we have not
+      independently verified the underlying studies. <a href="#r3">↩</a>
+    </li>
+    <li id="n4">
+      StopAI, <a href="https://stopai.info/" rel="noopener nofollow">stopai.info</a>,
+      retrieved __ISO_DATE__. <a href="#r4">↩</a>
+    </li>
+  </ol>
+</section>
+
+<section class="apparatus colophon" id="colophon">
+  <h2>Colophon</h2>
+  <dl>
+    <dt>Version</dt><dd>__VERSION__, built <time datetime="__ISO_DATE__">__HUMAN_DATE__</time></dd>
+    <dt>Set in</dt><dd>Iowan Old Style, falling back to Palatino and Georgia. Monospace for apparatus.</dd>
+    <dt>Built with</dt><dd>Two Python scripts and no framework. No JavaScript, no analytics, no cookies, no trackers, no fonts fetched from anyone else's server.</dd>
+    <dt>Board data</dt><dd>GitHub API, regenerated by <code>build_board.py</code>. Page rendered by <code>build_site.py</code>.</dd>
+    <dt>Corrections</dt><dd>If a claim here is wrong, write to <a href="mailto:__OPTOUT_EMAIL__">__OPTOUT_EMAIL__</a> and we will correct it in the next version and say what changed.</dd>
+    <dt>Licence</dt><dd><a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0</a>. Public domain, no attribution required.</dd>
+  </dl>
+</section>
+
+<footer>
+  <p>
+    AGI ASAP is an independent project. It is not affiliated with any company or laboratory,
+    nor with any person named on the recognition board.
+  </p>
+  <p>
+    Quotations in section IV are reproduced from the cited organisations' own public pages for the
+    purpose of answering them, and are their words, not ours.
+  </p>
+</footer>
+
+</div>
+</body>
+</html>

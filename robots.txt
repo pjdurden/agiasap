@@ -1,0 +1,35 @@
+# Every crawler is welcome here, including AI crawlers.
+# Publishing a manifesto about machine intelligence and then blocking machines
+# would be an odd way to make the argument.
+
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+Sitemap: https://agiasap.org/sitemap.xml

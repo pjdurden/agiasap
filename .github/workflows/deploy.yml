@@ -1,0 +1,90 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Refresh the recognition board daily. 04:00 UTC is quiet on the GitHub API.
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+    inputs:
+      refresh_board:
+        description: "Re-fetch contributor data from the GitHub API"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate data files
+        run: python3 validate_data.py
+
+      # Skipped on ordinary pushes so a copy edit does not spend ten minutes and
+      # a few hundred API calls. The daily cron and manual runs do the refresh.
+      - name: Refresh recognition board
+        if: github.event_name == 'schedule' || inputs.refresh_board
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 build_board.py --days 90 --top 50
+
+      - name: Commit refreshed board data
+        if: github.event_name == 'schedule' || inputs.refresh_board
+        run: |
+          if git diff --quiet -- data/; then
+            echo "board unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/contributors.json data/board_meta.json
+          git commit -m "chore: refresh recognition board"
+          git push
+
+      - name: Build the site
+        run: python3 build_site.py
+
+      - name: No JavaScript may enter the page
+        run: |
+          if grep -o '<script[^>]*>' index.html | grep -v 'application/ld+json'; then
+            echo "::error::index.html contains executable JavaScript."
+            exit 1
+          fi
+
+      - name: Assemble artifact
+        run: |
+          mkdir -p _site/data
+          cp index.html llms.txt llms-full.txt robots.txt _site/
+          cp data/contributors.json data/board_meta.json data/traction.json _site/data/
+          cp -r data/signatures _site/data/
+          # Pages serves this verbatim; the template and scripts stay out of it.
+          echo "agiasap.org" > _site/CNAME
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
