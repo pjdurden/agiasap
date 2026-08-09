@@ -1,0 +1,40 @@
+name: Remove me
+description: Take my name off the recognition board or the signatories. No reason needed.
+title: "remove"
+labels: ["removal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is always granted, immediately, and you do not have to explain why.
+
+        You do not need to be the account in question and we will not ask you to prove
+        anything. If someone wants a name off this site, the name comes off.
+
+  - type: input
+    id: handle
+    attributes:
+      label: Which name or handle?
+      placeholder: "@yourhandle"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where does it appear?
+      options:
+        - The recognition board (section VI)
+        - The signatories (section VIII)
+        - Both
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: anything
+    attributes:
+      label: Anything else? (optional)
+      description: Not required. Leave it blank and it will be actioned exactly the same.
+    validations:
+      required: false

@@ -22,11 +22,14 @@ import sys
 
 # ---------------------------------------------------------------- config
 SITE = "https://agiasap.org"
-OPTOUT_EMAIL = "optout@agiasap.org"
 GH_REPO = "pjdurden/agiasap"
 # The signing button opens the prefilled issue form; a workflow turns it into a PR.
 SIGN_URL = f"https://github.com/{GH_REPO}/issues/new?template=sign.yml"
 ENQUIRY_URL = f"https://github.com/{GH_REPO}/issues/new?template=fund.yml"
+# Removal must work from day one. People are named on the board without having
+# opted in, so the way off it cannot be a mailbox that does not exist yet.
+REMOVE_URL = f"https://github.com/{GH_REPO}/issues/new?template=remove.yml"
+CORRECTION_URL = f"https://github.com/{GH_REPO}/issues/new"
 VERSION = "0.1"
 # ------------------------------------------------------------------------
 
@@ -165,7 +168,8 @@ def render(tpl, rows, meta, sigs, trac, fund) -> str:
         "__WINDOW__": window,
         "__STAT_PRS__": f'{meta.get("total_prs", 0):,}',
         "__STAT_PEOPLE__": f'{meta.get("total_people", 0):,}',
-        "__OPTOUT_EMAIL__": OPTOUT_EMAIL,
+        "__REMOVE_URL__": REMOVE_URL,
+        "__CORRECTION_URL__": CORRECTION_URL,
         "__SIGN_URL__": SIGN_URL,
         # Jump to the addresses once they exist, otherwise straight to the enquiry.
         "__FUND_URL__": "#funding" if has_wallet else ENQUIRY_URL,
@@ -248,7 +252,7 @@ def to_markdown(page: str, rows, meta) -> str:
         f'{meta.get("total_people", 0):,} people.',
         "",
         "Inclusion is recognition of published work, not affiliation or endorsement.",
-        f"Removal on request: {OPTOUT_EMAIL}",
+        f"Removal on request: {REMOVE_URL}",
         "",
         "Public domain, CC0 1.0.",
         "",

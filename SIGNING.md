@@ -52,8 +52,7 @@ add an affiliation on your behalf, and we will remove one on request without ask
 
 ## Removing yourself
 
-Delete your file in a pull request, or say so in any issue, or write to the address in the
-colophon. **Removals are accepted from anyone, are never questioned, and do not require the
+Delete your file in a pull request, or say so in any issue, or [ask here](https://github.com/pjdurden/agiasap/issues/new?template=remove.yml). **Removals are accepted from anyone, are never questioned, and do not require the
 account that signed.** If you want off this list you get off this list, including if someone
 else put you on it.
 
@@ -61,4 +60,4 @@ else put you on it.
 
 The table in section VI is compiled from public GitHub contribution data. Being on it is not
 signing, is not endorsement, and several people on it would disagree with most of the document.
-To be excluded, add your handle to `optout.txt` or write to the same address.
+To be excluded, add your handle to `optout.txt` or [ask here](https://github.com/pjdurden/agiasap/issues/new?template=remove.yml).
