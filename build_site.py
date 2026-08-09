@@ -125,20 +125,9 @@ def sig_block(sigs) -> str:
     return '    <div class="sig-list">' + " · ".join(parts) + "</div>"
 
 
-def funding_html(fund: dict) -> str:
-    """Addresses if there are any, an honest fallback if not. Never a placeholder address."""
-    wallets = fund.get("wallets") or []
-    if not wallets:
-        return (
-            '  <p class="no-wallet">No wallet is published yet. Until a round exists there is'
-            " nothing to fund against, and holding money outside the ledger is the one thing this"
-            " page promises not to do. Tell us what you want to fund and we will come back to you.</p>\n"
-            f'  <div class="actions"><a class="action primary" href="{ENQUIRY_URL}">'
-            "Start a funding conversation</a></div>"
-        )
-
+def wallet_cards(fund: dict) -> str:
     out = []
-    for w in wallets:
+    for w in fund.get("wallets") or []:
         chain = html.escape(w["chain"])
         addr = html.escape(w["address"])
         assets = html.escape(", ".join(w.get("assets", [])))
@@ -153,11 +142,32 @@ def funding_html(fund: dict) -> str:
             f'    <div class="meta">{meta}</div>\n'
             f"  </div>"
         )
-    out.append(
-        f'  <div class="actions"><a class="action" href="{ENQUIRY_URL}">'
-        "Sponsor a round instead</a></div>"
-    )
     return "\n".join(out)
+
+
+def funding_modal(fund: dict) -> str:
+    """Same addresses as the section, in the popup."""
+    if not fund.get("wallets"):
+        return ('  <p style="font-size:0.95rem;color:var(--ink-soft)">No wallet is published '
+                "yet.</p>")
+    return (wallet_cards(fund) + '\n    <div class="actions">'
+            f'<a class="action primary" href="{ENQUIRY_URL}">Sponsor a round instead</a></div>')
+
+
+def funding_html(fund: dict) -> str:
+    """Addresses if there are any, an honest fallback if not. Never a placeholder address."""
+    wallets = fund.get("wallets") or []
+    if not wallets:
+        return (
+            '  <p class="no-wallet">No wallet is published yet. Until a round exists there is'
+            " nothing to fund against, and holding money outside the ledger is the one thing this"
+            " page promises not to do. Tell us what you want to fund and we will come back to you.</p>\n"
+            f'  <div class="actions"><a class="action primary" href="{ENQUIRY_URL}">'
+            "Start a funding conversation</a></div>"
+        )
+
+    return (wallet_cards(fund) + '\n  <div class="actions">'
+            f'<a class="action" href="{ENQUIRY_URL}">Sponsor a round instead</a></div>')
 
 
 def traction_strip(sigs, fig, treas) -> str:
@@ -199,8 +209,9 @@ def render(tpl, rows, meta, sigs, trac, fund, treas) -> str:
         "__CORRECTION_URL__": CORRECTION_URL,
         "__SIGN_URL__": SIGN_URL,
         # Jump to the addresses once they exist, otherwise straight to the enquiry.
-        "__FUND_URL__": "#funding" if has_wallet else ENQUIRY_URL,
+        "__FUND_URL__": "#fund-modal" if has_wallet else ENQUIRY_URL,
         "__FUNDING_BLOCK__": funding_html(fund),
+        "__FUNDING_MODAL__": funding_modal(fund),
     }
     for k, v in subs.items():
         tpl = tpl.replace(k, str(v))

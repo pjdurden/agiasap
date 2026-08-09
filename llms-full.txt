@@ -1,8 +1,8 @@
 # AGI ASAP
 
-> Compute is capital gated. Attention is not.
+> Artificial general intelligence,as soon as possible.
 
-Every model trained and every token served passes through open source maintained by a few thousand mostly unpaid people. We pay them, rank them, and put money behind the work that makes the whole stack faster. We do not care who reaches AGI first. We care that it gets reached.
+Compute is capital gated. Attention is not. Every model trained and every token served passes through open source maintained by a few thousand mostly unpaid people. We pay them, rank them, and put money behind the work that makes the whole stack faster. We do not care who reaches it first. We care that it gets reached.
 
 **Signatories**  
 2

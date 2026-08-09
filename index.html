@@ -111,9 +111,37 @@
   header.hero { padding: 4.5rem 0 3rem; border-bottom: 1px solid var(--rule); }
   header.hero h1 {
     margin-top: 1.4rem;
-    font: 400 clamp(2.2rem, 6.4vw, 3.3rem)/1.1 var(--serif);
-    letter-spacing: -0.02em; text-wrap: balance;
+    font: 400 clamp(2.35rem, 7vw, 3.7rem)/1.07 var(--serif);
+    letter-spacing: -0.024em; text-wrap: balance;
   }
+  header.hero h1 .asap { color: var(--mark); }
+
+  /* CSS-only modal. :target rather than a script, so the page keeps its
+     promise of rendering and working with no JavaScript at all. */
+  .modal {
+    display: none; position: fixed; inset: 0; z-index: 50;
+    align-items: center; justify-content: center; padding: 1.5rem;
+  }
+  .modal:target { display: flex; }
+  .modal .scrim {
+    position: absolute; inset: 0; background: rgba(8, 9, 11, 0.55);
+    backdrop-filter: blur(2px);
+  }
+  .modal .card {
+    position: relative; z-index: 1; width: 100%; max-width: 30rem;
+    max-height: 85vh; overflow-y: auto;
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 4px; padding: 1.8rem 1.7rem;
+    box-shadow: 0 18px 50px rgba(0,0,0,.28);
+  }
+  .modal .card h2 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+  .modal .card > p { font-size: 0.95rem; color: var(--ink-soft); }
+  .modal .close {
+    position: absolute; top: 0.55rem; right: 0.8rem;
+    font: 400 1.5rem/1 var(--sans); color: var(--ink-faint); text-decoration: none;
+  }
+  .modal .close:hover { color: var(--mark); }
+  .modal .wallet { margin: 1.1rem 0 0.9rem; }
   .standfirst { margin-top: 1.4rem; font-size: 1.2rem; line-height: 1.5; color: var(--ink-soft); max-width: 34rem; }
   .actions { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.9rem; }
   .action {
@@ -295,16 +323,17 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="kicker">Prizes, grants and compute for open AI infrastructure</div>
-    <h1>Compute is capital gated. Attention is not.</h1>
+    <div class="kicker">AGI ASAP</div>
+    <h1>Artificial general intelligence,<br><span class="asap">as soon as possible.</span></h1>
     <p class="standfirst">
-      Every model trained and every token served passes through open source maintained by a few
-      thousand mostly unpaid people. We pay them, rank them, and put money behind the work that
-      makes the whole stack faster. We do not care who reaches AGI first. We care that it gets reached.
+      <strong>Compute is capital gated. Attention is not.</strong> Every model trained and every
+      token served passes through open source maintained by a few thousand mostly unpaid people.
+      We pay them, rank them, and put money behind the work that makes the whole stack faster.
+      We do not care who reaches it first. We care that it gets reached.
     </p>
     <div class="actions">
       <a class="action primary" href="https://github.com/pjdurden/agiasap/issues/new?template=sign.yml">Sign the declaration</a>
-      <a class="action" href="#funding">Fund a round</a>
+      <a class="action" href="#fund-modal">Fund a round</a>
     </div>
   <dl class="traction">
     <div><dt>Signatories</dt><dd>2</dd></div>
@@ -722,6 +751,28 @@
     </p>
   </div>
 </footer>
+
+<div class="modal" id="fund-modal" role="dialog" aria-modal="true" aria-labelledby="fund-modal-title">
+  <a class="scrim" href="#top" aria-label="Close"></a>
+  <div class="card">
+    <a class="close" href="#top" aria-label="Close">&times;</a>
+    <h2 id="fund-modal-title">Fund a round</h2>
+    <p>
+      Send to the address below on any of these chains. Everything that arrives is read straight
+      from the chain and shown at the top of this page, so you can check it landed.
+    </p>
+  <div class="wallet">
+    <div class="chain">Ethereum, Base, Arbitrum, Optimism</div>
+    <code class="addr">0x3b246C669de034880DD3Ba7d6FD58c0d94431883</code>
+    <div class="meta">Accepts ETH, USDC. <a href="https://etherscan.io/address/0x3b246C669de034880DD3Ba7d6FD58c0d94431883" rel="noopener">Verify every transaction on the explorer.</a></div>
+  </div>
+    <div class="actions"><a class="action primary" href="https://github.com/pjdurden/agiasap/issues/new?template=fund.yml">Sponsor a round instead</a></div>
+    <p style="font-size:0.86rem;color:var(--ink-faint);margin-top:0.9rem">
+      Funding something specific rather than the general pot? A round with a defined outcome is
+      worth more to both of us than a donation.
+    </p>
+  </div>
+</div>
 
 </body>
 </html>
