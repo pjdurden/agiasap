@@ -145,8 +145,6 @@ Then pick the lane where you are actually useful. There is no fee and no approva
 
 Everything that comes in and everything that goes out is recorded in traction.json, and the figures at the top of this page are summed from it rather than typed in.
 
-No wallet is published yet. Until a round exists there is nothing to fund against, and holding money outside the ledger is the one thing this page promises not to do. Tell us what you want to fund and we will come back to you.
-
 Crypto first because the ledger is the point: anyone can verify what arrived without taking our word for it. Fiat through a transparent host will follow. If you are a hardware vendor or an inference company wanting specific work landed upstream, the enquiry form is the better route, because a round with a defined outcome is worth more to both of us than a donation.
 
 ## Notes
