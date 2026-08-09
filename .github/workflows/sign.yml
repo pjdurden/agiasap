@@ -125,7 +125,16 @@ jobs:
           git checkout -b "$BRANCH"
           git add data/signatures/
           git commit -m "sign: @${HANDLE}"
-          git push -u origin "$BRANCH"
+          # Force, because a previous attempt may have left this branch behind.
+          # It is bot-owned and named for one handle, so nothing else can be lost.
+          git push -f -u origin "$BRANCH"
+
+          # An open PR from an earlier retry means there is nothing left to do.
+          if gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' | grep -q .; then
+            echo "a pull request for $BRANCH is already open"
+            exit 0
+          fi
+
           gh pr create \
             --title "sign: @${HANDLE}" \
             --body "Signature requested by @${HANDLE} in #${ISSUE}.
