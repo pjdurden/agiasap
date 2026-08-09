@@ -72,8 +72,17 @@ jobs:
           cp index.html llms.txt llms-full.txt robots.txt _site/
           cp data/contributors.json data/board_meta.json data/traction.json _site/data/
           cp -r data/signatures _site/data/
-          # Pages serves this verbatim; the template and scripts stay out of it.
-          echo "agiasap.org" > _site/CNAME
+          # Only claim a custom domain once it actually exists. A CNAME file for a
+          # domain you do not own also breaks the default github.io URL, because
+          # Pages redirects there and the name does not resolve.
+          if [ -n "${CUSTOM_DOMAIN}" ]; then
+            echo "${CUSTOM_DOMAIN}" > _site/CNAME
+            echo "custom domain: ${CUSTOM_DOMAIN}"
+          else
+            echo "no custom domain set; serving from github.io"
+          fi
+        env:
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
