@@ -7,15 +7,9 @@ Every year of delay is paid for in problems that stayed unsolved, in treatments 
 A declaration · Version 0.1 · 09 August 2026 · Public domain
 
 **Signatories**  
-0
+1
 
 **Committed**  
-$0
-
-**Rounds run**  
-0
-
-**Paid out**  
 $0
 
 ## I. The claim
@@ -130,8 +124,6 @@ No text is baked into images, every date is ISO 8601, and the structured data en
 ## VIII. Signatories
 
 Signing means you agree with the claim in section one. It does not commit you to anything else.
-
-No signatories yet. This document was published before anyone had signed it, including its author, which is the only honest order to do it in.
 
 Then pick the lane where you are actually useful. There is no fee and no approval queue.
 

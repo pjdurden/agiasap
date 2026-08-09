@@ -31,6 +31,11 @@ ENQUIRY_URL = f"https://github.com/{GH_REPO}/issues/new?template=fund.yml"
 REMOVE_URL = f"https://github.com/{GH_REPO}/issues/new?template=remove.yml"
 CORRECTION_URL = f"https://github.com/{GH_REPO}/issues/new"
 VERSION = "0.1"
+
+# Which cells the traction strip shows, in order. Rounds and payouts are out
+# until there is something to put in them; a box of zeros above the fold reads
+# as "nothing is happening here". Add them back the day round 001 closes.
+STRIP_CELLS = ["signatories", "committed"]
 # ------------------------------------------------------------------------
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -147,6 +152,21 @@ def funding_html(fund: dict) -> str:
     return "\n".join(out)
 
 
+def traction_strip(sigs, fig) -> str:
+    """The strip, or nothing at all if every cell is switched off."""
+    labels = {
+        "signatories": ("Signatories", f"{len(sigs):,}"),
+        "committed": ("Committed", fig["committed"]),
+        "rounds": ("Rounds run", fig["rounds"]),
+        "paid_out": ("Paid out", fig["paid_out"]),
+    }
+    cells = [labels[c] for c in STRIP_CELLS if c in labels]
+    if not cells:
+        return ""
+    inner = "\n".join(f"    <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in cells)
+    return f'  <dl class="traction">\n{inner}\n  </dl>'
+
+
 def render(tpl, rows, meta, sigs, trac, fund) -> str:
     today = dt.date.today()
     window = "unknown"
@@ -162,9 +182,7 @@ def render(tpl, rows, meta, sigs, trac, fund) -> str:
         "__SIG_BLOCK__": sig_block(sigs),
         "__N_SIGS__": f"{len(sigs):,}",
         "__SIG_NOUN__": "signatory" if len(sigs) == 1 else "signatories",
-        "__COMMITTED__": fig["committed"],
-        "__N_ROUNDS__": fig["rounds"],
-        "__PAID_OUT__": fig["paid_out"],
+        "__TRACTION_STRIP__": traction_strip(sigs, fig),
         "__WINDOW__": window,
         "__STAT_PRS__": f'{meta.get("total_prs", 0):,}',
         "__STAT_PEOPLE__": f'{meta.get("total_people", 0):,}',
