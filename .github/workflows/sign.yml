@@ -47,6 +47,12 @@ jobs:
           for label, value in re.findall(r"^###\s+(.+?)\s*\n+(.*?)(?=\n###\s|\Z)", body, re.S | re.M):
               fields[label.strip().lower()] = value.strip()
 
+          def die(msg):
+              """Fail with a reason the signatory can act on, not just a log line."""
+              pathlib.Path("sign_error.txt").write_text(msg)
+              print(f"::error::{msg}")
+              sys.exit(1)
+
           def get(*names):
               for n in names:
                   v = fields.get(n, "")
@@ -61,22 +67,28 @@ jobs:
 
           LANES = {"infra", "research", "compute", "evals", "signal", "capital"}
           if lane not in LANES:
-              print(f"::error::lane {lane!r} is not one of {sorted(LANES)}")
-              sys.exit(1)
+              die(f"Lane {lane!r} is not one of: {', '.join(sorted(LANES))}")
           if len(name) > 80:
-              print("::error::name is longer than 80 characters")
-              sys.exit(1)
-          if url and not url.startswith("https://"):
-              print("::error::link must start with https://")
-              sys.exit(1)
+              die("Name is longer than 80 characters.")
+
+          # People type "prajj.com", not "https://prajj.com". Failing a signature
+          # over a missing scheme is a pointless way to lose someone, so normalise
+          # instead. Storage stays strict; leniency belongs at the input edge.
+          if url:
+              url = url.strip().rstrip("/")
+              if url.startswith("http://"):
+                  url = "https://" + url[len("http://"):]
+              elif not url.startswith("https://"):
+                  url = "https://" + url.lstrip("/")
+              if not re.fullmatch(r"https://[\w.-]+\.[a-zA-Z]{2,}(/\S*)?", url):
+                  die(f"Could not read {url!r} as a web address. Something like https://example.org")
+              print(f"link normalised to {url}")
           if affiliation and len(affiliation) > 60:
-              print("::error::affiliation is longer than 60 characters")
-              sys.exit(1)
+              die("Affiliation is longer than 60 characters.")
 
           path = pathlib.Path("data/signatures") / f"{author.lower()}.json"
           if path.exists():
-              print(f"::error::{author} has already signed")
-              sys.exit(1)
+              die(f"@{author} has already signed. Thank you twice.")
 
           record = {
               "name": name,
@@ -138,4 +150,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
         run: |
-          gh issue comment "$ISSUE" --body "Something in that submission did not validate, so no pull request was opened. See the run log for the specific reason: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          REASON=$(cat sign_error.txt 2>/dev/null || echo "Something went wrong that was not your fault.")
+          gh issue comment "$ISSUE" --body "No pull request was opened.
+
+          **${REASON}**
+
+          Edit this issue to correct it and we will pick it up, or just say what you meant and it will be sorted by hand. Full log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
