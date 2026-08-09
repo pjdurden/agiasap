@@ -1,0 +1,5 @@
+{
+  "_comment": "Addresses shown in the funding section. Leave wallets empty and the site falls back to the enquiry form only. EVM addresses MUST be in EIP-55 checksummed form (copy it out of your wallet, do not retype it); CI rejects anything else, and it also rejects an explorer link that does not contain the same address.",
+  "wallets": [],
+  "open_collective": null
+}

@@ -19,6 +19,12 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent
 SIGDIR = ROOT / "data" / "signatures"
 TRACTION = ROOT / "data" / "traction.json"
+FUNDING = ROOT / "data" / "funding.json"
+
+sys.path.insert(0, str(ROOT))
+from keccak import is_checksum_address, to_checksum_address  # noqa: E402
+
+B58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
 LANES = {"infra", "research", "compute", "evals", "signal", "capital"}
 # GitHub's own rule: alphanumerics and single hyphens, no leading/trailing hyphen.
@@ -154,9 +160,90 @@ def check_traction() -> None:
           f"{len(data.get('rounds', []) or [])} round(s)")
 
 
+def b58_decode_len(s: str) -> int:
+    """Byte length of a base58 string, or -1 if it contains an invalid character."""
+    n = 0
+    for ch in s:
+        if ch not in B58:
+            return -1
+        n = n * 58 + B58.index(ch)
+    body = n.to_bytes((n.bit_length() + 7) // 8, "big")
+    return len(s) - len(s.lstrip("1")) + len(body)
+
+
+def check_funding() -> None:
+    """
+    A wrong character here means donations that arrive nowhere, so this is the
+    strictest check in the file.
+    """
+    if not FUNDING.exists():
+        fail("funding.json", "file is missing")
+        return
+    try:
+        data = json.loads(FUNDING.read_text())
+    except json.JSONDecodeError as e:
+        fail("funding.json", f"invalid JSON: {e}")
+        return
+
+    wallets = data.get("wallets")
+    if not isinstance(wallets, list):
+        fail("funding.json", "wallets must be a list")
+        return
+
+    for i, w in enumerate(wallets):
+        at = f"wallets[{i}]"
+        if not isinstance(w, dict):
+            fail(at, "must be an object")
+            continue
+
+        addr = w.get("address")
+        kind = (w.get("type") or "evm").lower()
+
+        if not isinstance(addr, str) or not addr.strip():
+            fail(at, "address is required")
+            continue
+
+        if kind == "evm":
+            if not re.fullmatch(r"0x[0-9a-fA-F]{40}", addr):
+                fail(at, f"not a 20-byte 0x address: {addr!r}")
+            elif not is_checksum_address(addr):
+                body = addr.removeprefix("0x")
+                if body.islower() or body.isupper():
+                    fail(at, "address has no EIP-55 checksum. Paste the mixed-case form "
+                             f"from your wallet: {to_checksum_address(addr)}")
+                else:
+                    fail(at, "EIP-55 checksum is INVALID, which usually means a typo. "
+                             f"Expected {to_checksum_address(addr)}")
+        elif kind == "solana":
+            n = b58_decode_len(addr)
+            if n != 32:
+                fail(at, f"not a valid 32-byte base58 Solana address (decoded to {n} bytes)")
+        else:
+            fail(at, f"unknown type {kind!r}; use 'evm' or 'solana'")
+
+        if not isinstance(w.get("chain"), str) or not w["chain"].strip():
+            fail(at, "chain is required, e.g. 'Ethereum, Base, Arbitrum'")
+
+        assets = w.get("assets")
+        if not isinstance(assets, list) or not assets or not all(isinstance(a, str) for a in assets):
+            fail(at, "assets must be a non-empty list of strings, e.g. ['ETH', 'USDC']")
+
+        # If the explorer link points somewhere else, a donor who checks it is
+        # verifying an address other than the one on the page.
+        exp = w.get("explorer")
+        if exp is not None:
+            if not isinstance(exp, str) or not exp.startswith("https://"):
+                fail(at, "explorer must be an https:// URL")
+            elif isinstance(addr, str) and addr.lower() not in exp.lower():
+                fail(at, "explorer URL does not contain the address it claims to show")
+
+    print(f"funding.json: {len(wallets)} wallet(s)")
+
+
 def main() -> None:
     check_signatures()
     check_traction()
+    check_funding()
     if problems:
         print(f"\n{len(problems)} problem(s):\n", file=sys.stderr)
         for p in problems:

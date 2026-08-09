@@ -219,6 +219,23 @@
   .action.primary { background: var(--mark); border-color: var(--mark); color: #fff; }
   .action.primary:hover { opacity: 0.88; background: var(--mark); color: #fff; }
 
+  /* ---- funding ---- */
+  .wallet {
+    margin: 1.25rem 0; padding: 1.15rem 1.25rem; border: 1px solid var(--rule);
+    border-radius: 3px; background: var(--wash);
+  }
+  .wallet .chain {
+    font: 600 0.66rem/1 var(--mono); letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  .wallet .addr {
+    display: block; margin: 0.7rem 0 0; font: 400 0.86rem/1.5 var(--mono);
+    word-break: break-all; user-select: all; color: var(--ink);
+  }
+  .wallet .meta { margin-top: 0.7rem; font-size: 0.83rem; color: var(--ink-faint); }
+  .wallet .meta a { color: var(--ink-soft); }
+  .no-wallet { font-size: 1rem; color: var(--ink-soft); margin-bottom: 1.2rem; }
+
   /* ---- notes + colophon ---- */
   .apparatus { padding: 3.5rem 0; border-bottom: 1px solid var(--rule); }
   .apparatus ol { margin-left: 1.3rem; }
@@ -285,6 +302,7 @@
     <li><a href="#board"><span class="n">VI</span><span class="t">Who is doing the work</span></a></li>
     <li><a href="#machine"><span class="n">VII</span><span class="t">Built to be read by machines</span></a></li>
     <li><a href="#sign"><span class="n">VIII</span><span class="t">Signatories</span></a></li>
+    <li><a href="#funding"><span class="n">IX</span><span class="t">Funding</span></a></li>
   </ol>
 </nav>
 
@@ -599,6 +617,23 @@
     <a class="action primary" href="https://github.com/pjdurden/agiasap/issues/new?template=sign.yml">Sign the declaration</a>
     <a class="action" href="https://github.com/pjdurden/agiasap/issues/new?template=fund.yml">Fund a round</a>
   </div>
+</section>
+
+<section id="funding">
+  <h2><span class="num">IX</span>Funding</h2>
+  <p class="lead">
+    Everything that comes in and everything that goes out is recorded in
+    <a href="/data/traction.json"><code>traction.json</code></a>, and the figures at the top of
+    this page are summed from it rather than typed in.
+  </p>
+  <p class="no-wallet">No wallet is published yet. Until a round exists there is nothing to fund against, and holding money outside the ledger is the one thing this page promises not to do. Tell us what you want to fund and we will come back to you.</p>
+  <div class="actions"><a class="action primary" href="https://github.com/pjdurden/agiasap/issues/new?template=fund.yml">Start a funding conversation</a></div>
+  <p class="note">
+    Crypto first because the ledger is the point: anyone can verify what arrived without taking our
+    word for it. Fiat through a transparent host will follow. If you are a hardware vendor or an
+    inference company wanting specific work landed upstream, the enquiry form is the better route,
+    because a round with a defined outcome is worth more to both of us than a donation.
+  </p>
 </section>
 
 </article>

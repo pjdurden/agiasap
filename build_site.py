@@ -26,9 +26,7 @@ OPTOUT_EMAIL = "optout@agiasap.org"
 GH_REPO = "pjdurden/agiasap"
 # The signing button opens the prefilled issue form; a workflow turns it into a PR.
 SIGN_URL = f"https://github.com/{GH_REPO}/issues/new?template=sign.yml"
-# Deliberately an enquiry, not a checkout. Taking money before a round exists
-# would mean holding funds against an empty ledger.
-FUND_URL = f"https://github.com/{GH_REPO}/issues/new?template=fund.yml"
+ENQUIRY_URL = f"https://github.com/{GH_REPO}/issues/new?template=fund.yml"
 VERSION = "0.1"
 # ------------------------------------------------------------------------
 
@@ -38,6 +36,7 @@ DATA = ROOT / "data" / "contributors.json"
 META = ROOT / "data" / "board_meta.json"
 SIGDIR = ROOT / "data" / "signatures"
 TRACTION = ROOT / "data" / "traction.json"
+FUNDING = ROOT / "data" / "funding.json"
 
 
 def load():
@@ -52,7 +51,8 @@ def load():
     sigs = [json.loads(p.read_text()) for p in sorted(SIGDIR.glob("*.json"))]
     sigs.sort(key=lambda s: (s.get("signed", ""), s.get("github", "").lower()))
     trac = json.loads(TRACTION.read_text()) if TRACTION.exists() else {}
-    return TEMPLATE.read_text(), rows, meta, sigs, trac
+    fund = json.loads(FUNDING.read_text()) if FUNDING.exists() else {}
+    return TEMPLATE.read_text(), rows, meta, sigs, trac, fund
 
 
 def money(amount, currency: str) -> str:
@@ -109,12 +109,48 @@ def sig_block(sigs) -> str:
     return '    <div class="sig-list">' + " · ".join(parts) + "</div>"
 
 
-def render(tpl, rows, meta, sigs, trac) -> str:
+def funding_html(fund: dict) -> str:
+    """Addresses if there are any, an honest fallback if not. Never a placeholder address."""
+    wallets = fund.get("wallets") or []
+    if not wallets:
+        return (
+            '  <p class="no-wallet">No wallet is published yet. Until a round exists there is'
+            " nothing to fund against, and holding money outside the ledger is the one thing this"
+            " page promises not to do. Tell us what you want to fund and we will come back to you.</p>\n"
+            f'  <div class="actions"><a class="action primary" href="{ENQUIRY_URL}">'
+            "Start a funding conversation</a></div>"
+        )
+
+    out = []
+    for w in wallets:
+        chain = html.escape(w["chain"])
+        addr = html.escape(w["address"])
+        assets = html.escape(", ".join(w.get("assets", [])))
+        meta = f"Accepts {assets}."
+        if w.get("explorer"):
+            meta += (f' <a href="{html.escape(w["explorer"])}" rel="noopener">'
+                     "Verify every transaction on the explorer.</a>")
+        out.append(
+            f'  <div class="wallet">\n'
+            f'    <div class="chain">{chain}</div>\n'
+            f'    <code class="addr">{addr}</code>\n'
+            f'    <div class="meta">{meta}</div>\n'
+            f"  </div>"
+        )
+    out.append(
+        f'  <div class="actions"><a class="action" href="{ENQUIRY_URL}">'
+        "Sponsor a round instead</a></div>"
+    )
+    return "\n".join(out)
+
+
+def render(tpl, rows, meta, sigs, trac, fund) -> str:
     today = dt.date.today()
     window = "unknown"
     if meta.get("since") and meta.get("until"):
         window = f'{meta["since"]} to {meta["until"]}'
     fig = traction_figures(trac)
+    has_wallet = bool(fund.get("wallets"))
     subs = {
         "__ISO_DATE__": today.isoformat(),
         "__HUMAN_DATE__": today.strftime("%d %B %Y"),
@@ -131,7 +167,9 @@ def render(tpl, rows, meta, sigs, trac) -> str:
         "__STAT_PEOPLE__": f'{meta.get("total_people", 0):,}',
         "__OPTOUT_EMAIL__": OPTOUT_EMAIL,
         "__SIGN_URL__": SIGN_URL,
-        "__FUND_URL__": FUND_URL,
+        # Jump to the addresses once they exist, otherwise straight to the enquiry.
+        "__FUND_URL__": "#funding" if has_wallet else ENQUIRY_URL,
+        "__FUNDING_BLOCK__": funding_html(fund),
     }
     for k, v in subs.items():
         tpl = tpl.replace(k, str(v))
@@ -289,8 +327,8 @@ Sitemap: {site}/sitemap.xml
 
 
 def main() -> None:
-    tpl, rows, meta, sigs, trac = load()
-    page = render(tpl, rows, meta, sigs, trac)
+    tpl, rows, meta, sigs, trac, fund = load()
+    page = render(tpl, rows, meta, sigs, trac, fund)
 
     (ROOT / "index.html").write_text(page)
     (ROOT / "llms-full.txt").write_text(to_markdown(page, rows, meta))
