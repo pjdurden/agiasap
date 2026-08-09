@@ -9,8 +9,8 @@ A declaration · Version 0.1 · 09 August 2026 · Public domain
 **Signatories**  
 1
 
-**Committed**  
-$0
+**Received**  
+$1
 
 ## I. The claim
 

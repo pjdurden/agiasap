@@ -46,15 +46,21 @@ jobs:
       - name: Commit refreshed board data
         if: github.event_name == 'schedule' || inputs.refresh_board
         run: |
-          if git diff --quiet -- data/; then
+          if git diff --quiet -- data/contributors.json data/board_meta.json data/treasury.json; then
             echo "board unchanged"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/contributors.json data/board_meta.json
+          git add data/contributors.json data/board_meta.json data/treasury.json
           git commit -m "chore: refresh recognition board"
           git push
+
+      # Balances are read from public RPCs on every deploy and on the daily
+      # cron, so the published figure is never typed in by hand.
+      - name: Read the treasury
+        continue-on-error: true
+        run: python3 read_treasury.py
 
       - name: Build the site
         run: python3 build_site.py
@@ -70,7 +76,8 @@ jobs:
         run: |
           mkdir -p _site/data
           cp index.html llms.txt llms-full.txt robots.txt _site/
-          cp data/contributors.json data/board_meta.json data/traction.json _site/data/
+          cp data/contributors.json data/board_meta.json data/traction.json data/funding.json _site/data/
+          cp data/treasury.json _site/data/ 2>/dev/null || true
           cp -r data/signatures _site/data/
           # Only claim a custom domain once it actually exists. A CNAME file for a
           # domain you do not own also breaks the default github.io URL, because

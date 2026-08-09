@@ -35,7 +35,7 @@ VERSION = "0.1"
 # Which cells the traction strip shows, in order. Rounds and payouts are out
 # until there is something to put in them; a box of zeros above the fold reads
 # as "nothing is happening here". Add them back the day round 001 closes.
-STRIP_CELLS = ["signatories", "committed"]
+STRIP_CELLS = ["signatories", "received"]
 # ------------------------------------------------------------------------
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -45,6 +45,7 @@ META = ROOT / "data" / "board_meta.json"
 SIGDIR = ROOT / "data" / "signatures"
 TRACTION = ROOT / "data" / "traction.json"
 FUNDING = ROOT / "data" / "funding.json"
+TREASURY = ROOT / "data" / "treasury.json"
 
 
 def load():
@@ -60,7 +61,8 @@ def load():
     sigs.sort(key=lambda s: (s.get("signed", ""), s.get("github", "").lower()))
     trac = json.loads(TRACTION.read_text()) if TRACTION.exists() else {}
     fund = json.loads(FUNDING.read_text()) if FUNDING.exists() else {}
-    return TEMPLATE.read_text(), rows, meta, sigs, trac, fund
+    treas = json.loads(TREASURY.read_text()) if TREASURY.exists() else {}
+    return TEMPLATE.read_text(), rows, meta, sigs, trac, fund, treas
 
 
 def money(amount, currency: str) -> str:
@@ -158,11 +160,12 @@ def funding_html(fund: dict) -> str:
     return "\n".join(out)
 
 
-def traction_strip(sigs, fig) -> str:
+def traction_strip(sigs, fig, treas) -> str:
     """The strip, or nothing at all if every cell is switched off."""
     labels = {
         "signatories": ("Signatories", f"{len(sigs):,}"),
         "committed": ("Committed", fig["committed"]),
+        "received": ("Received", money(treas.get("usd_total", 0), "USD")),
         "rounds": ("Rounds run", fig["rounds"]),
         "paid_out": ("Paid out", fig["paid_out"]),
     }
@@ -173,7 +176,7 @@ def traction_strip(sigs, fig) -> str:
     return f'  <dl class="traction">\n{inner}\n  </dl>'
 
 
-def render(tpl, rows, meta, sigs, trac, fund) -> str:
+def render(tpl, rows, meta, sigs, trac, fund, treas) -> str:
     today = dt.date.today()
     window = "unknown"
     if meta.get("since") and meta.get("until"):
@@ -188,7 +191,7 @@ def render(tpl, rows, meta, sigs, trac, fund) -> str:
         "__SIG_BLOCK__": sig_block(sigs),
         "__N_SIGS__": f"{len(sigs):,}",
         "__SIG_NOUN__": "signatory" if len(sigs) == 1 else "signatories",
-        "__TRACTION_STRIP__": traction_strip(sigs, fig),
+        "__TRACTION_STRIP__": traction_strip(sigs, fig, treas),
         "__WINDOW__": window,
         "__STAT_PRS__": f'{meta.get("total_prs", 0):,}',
         "__STAT_PEOPLE__": f'{meta.get("total_people", 0):,}',
@@ -355,8 +358,8 @@ Sitemap: {site}/sitemap.xml
 
 
 def main() -> None:
-    tpl, rows, meta, sigs, trac, fund = load()
-    page = render(tpl, rows, meta, sigs, trac, fund)
+    tpl, rows, meta, sigs, trac, fund, treas = load()
+    page = render(tpl, rows, meta, sigs, trac, fund, treas)
 
     (ROOT / "index.html").write_text(page)
     (ROOT / "llms-full.txt").write_text(to_markdown(page, rows, meta))

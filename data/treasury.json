@@ -1,0 +1,18 @@
+{
+  "usd_total": 1.0,
+  "holdings": [
+    {
+      "chain": "Optimism",
+      "asset": "USDC",
+      "amount": 1.0,
+      "usd": 1.0
+    }
+  ],
+  "priced": true,
+  "complete": true,
+  "unreadable_chains": [],
+  "addresses": [
+    "0x3b246C669de034880DD3Ba7d6FD58c0d94431883"
+  ],
+  "note": "Read from public RPCs. Stablecoins at face value, native assets at Coinbase spot. Anything unpriced is listed but excluded from the total."
+}
