@@ -26,7 +26,9 @@ OPTOUT_EMAIL = "optout@agiasap.org"
 GH_REPO = "pjdurden/agiasap"
 # The signing button opens the prefilled issue form; a workflow turns it into a PR.
 SIGN_URL = f"https://github.com/{GH_REPO}/issues/new?template=sign.yml"
-FUND_URL = "#"
+# Deliberately an enquiry, not a checkout. Taking money before a round exists
+# would mean holding funds against an empty ledger.
+FUND_URL = f"https://github.com/{GH_REPO}/issues/new?template=fund.yml"
 VERSION = "0.1"
 # ------------------------------------------------------------------------
 

@@ -1,0 +1,56 @@
+name: Fund a round
+description: Sponsor a tournament round, or fund grants and compute.
+title: "fund"
+labels: ["funding"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        There is no donate button yet, deliberately. Nothing has been run and nothing has been
+        paid out, so taking money today would mean holding it against no ledger. When a round
+        exists you can fund it and see exactly where every unit went.
+
+        In the meantime, tell us what you want to fund and we will come back to you.
+        Everything committed and everything paid appears in
+        [`data/traction.json`](https://github.com/pjdurden/agiasap/blob/main/data/traction.json).
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What would you like to fund?
+      options:
+        - A tournament round (a purse against a specific infrastructure problem)
+        - Grants for independent contributors
+        - Compute for people who have the idea and not the hardware
+        - General, use it wherever it is most useful
+        - Not sure yet, want to talk
+    validations:
+      required: true
+
+  - type: input
+    id: amount
+    attributes:
+      label: Rough scale (optional)
+      description: A range is fine. This is to work out what is realistic, not a commitment.
+      placeholder: e.g. 2k to 5k
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything specific?
+      description: >
+        If you are a hardware vendor or an inference company with a particular problem you want
+        landed upstream, describe it. Those make the best rounds because the outcome is measurable
+        and the work is wanted.
+    validations:
+      required: false
+
+  - type: input
+    id: contact
+    attributes:
+      label: How should we reach you?
+      description: Email, or a handle. This issue is public, so leave it blank if you would rather we replied here.
+    validations:
+      required: false

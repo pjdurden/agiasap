@@ -207,6 +207,9 @@
 
   /* ---- actions ---- */
   .actions { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 2rem; }
+  /* Above the fold. A reader who is already convinced should not have to scroll
+     four thousand words to act, and one who is not will scroll anyway. */
+  .actions-top { margin-top: 2.25rem; }
   .action {
     font: 600 0.72rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
     padding: 0.95rem 1.5rem; border: 1px solid var(--ink); border-radius: 2px;
@@ -254,6 +257,11 @@
     that arrived late, and in people who did not live to see the answer.
     We exist to make it arrive sooner.
   </p>
+  <div class="actions actions-top">
+    <a class="action primary" href="https://github.com/pjdurden/agiasap/issues/new?template=sign.yml">Sign the declaration</a>
+    <a class="action" href="https://github.com/pjdurden/agiasap/issues/new?template=fund.yml">Fund a round</a>
+  </div>
+
   <p class="dateline">
     <span>A declaration</span><span>Version 0.1</span><span><time datetime="2026-08-09">09 August 2026</time></span><span>Public domain</span>
   </p>
@@ -589,7 +597,7 @@
   </ul>
   <div class="actions">
     <a class="action primary" href="https://github.com/pjdurden/agiasap/issues/new?template=sign.yml">Sign the declaration</a>
-    <a class="action" href="#">Fund the work</a>
+    <a class="action" href="https://github.com/pjdurden/agiasap/issues/new?template=fund.yml">Fund a round</a>
   </div>
 </section>
 
