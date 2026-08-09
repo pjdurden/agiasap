@@ -120,6 +120,40 @@ jobs:
       - name: Validate before proposing
         run: python3 validate_data.py
 
+      # Decides auto-merge versus a human look. The handle is always genuine, but
+      # the display name is free text, so a day-old account calling itself a
+      # well-known researcher is the case worth catching.
+      - name: Assess the account
+        id: trust
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AUTHOR: ${{ github.event.issue.user.login }}
+        run: |
+          python3 - <<'PY'
+          import datetime, json, os, subprocess
+
+          author = os.environ["AUTHOR"]
+          u = json.loads(subprocess.run(
+              ["gh", "api", f"/users/{author}"], capture_output=True, text=True, check=True).stdout)
+
+          created = datetime.datetime.fromisoformat(u["created_at"].replace("Z", "+00:00"))
+          age = (datetime.datetime.now(datetime.timezone.utc) - created).days
+          repos, followers = u.get("public_repos", 0), u.get("followers", 0)
+
+          reasons = []
+          if age < 30:
+              reasons.append(f"account is {age} days old")
+          if repos == 0 and followers == 0:
+              reasons.append("no public repositories or followers")
+
+          auto = not reasons
+          print(f"@{author}: age={age}d repos={repos} followers={followers} -> "
+                f"{'auto-merge' if auto else 'hold: ' + '; '.join(reasons)}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"auto={'true' if auto else 'false'}\n")
+              f.write(f"why={'; '.join(reasons)}\n")
+          PY
+
       - name: Open the pull request
         id: pr
         env:
@@ -155,15 +189,45 @@ jobs:
           Closes #${ISSUE}" \
             --base main --head "$BRANCH"
 
+          PR=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number')
+          echo "pr=$PR" >> "$GITHUB_OUTPUT"
+
+      - name: Merge it
+        if: steps.pr.outputs.already != 'true' && steps.trust.outputs.auto == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ steps.pr.outputs.pr }}
+        run: gh pr merge "$PR" --squash --delete-branch
+
+      - name: Flag for review instead
+        if: steps.pr.outputs.already != 'true' && steps.trust.outputs.auto != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ steps.pr.outputs.pr }}
+          WHY: ${{ steps.trust.outputs.why }}
+        run: |
+          gh pr edit "$PR" --add-label "needs-review"
+          gh pr comment "$PR" --body "Held for a human look: ${WHY}.
+
+          Nothing is wrong with this signature and the handle is genuine. The display name is
+          free text though, so new accounts are checked by eye before going on the page."
+
       - name: Tell them what happened
         if: steps.pr.outputs.already != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
+          AUTO: ${{ steps.trust.outputs.auto }}
         run: |
-          gh issue comment "$ISSUE" --body "Thanks. A pull request with your signature is open and will be merged shortly. It will appear on the site at the next build.
+          if [ "$AUTO" = "true" ]; then
+            gh issue comment "$ISSUE" --body "Signed, and merged. You will appear on the site at the next build, within the hour.
 
           Changed your mind at any point? Say so here or open a pull request deleting your file. Removals are never questioned."
+          else
+            gh issue comment "$ISSUE" --body "Thanks. Your signature is queued for a quick manual look, which is routine for newer accounts, and will be merged shortly.
+
+          Changed your mind at any point? Say so here. Removals are never questioned."
+          fi
 
       - name: Report failure on the issue
         if: failure()

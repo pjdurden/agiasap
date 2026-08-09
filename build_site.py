@@ -109,11 +109,17 @@ def sig_block(sigs) -> str:
     parts = []
     for s in sigs:
         name = html.escape(s["name"])
+        gh = html.escape(s["github"])
         if s.get("url"):
             name = f'<a href="{html.escape(s["url"])}" rel="noopener nofollow">{name}</a>'
+        # The handle is verified; the display name is free text the signatory typed.
+        # Always show both, so a name someone else recognises is visibly attached to
+        # a real account rather than floating free.
+        entry = (f'{name} <a class="handle" href="https://github.com/{gh}" '
+                 f'rel="noopener nofollow">@{gh}</a>')
         if s.get("affiliation"):
-            name += f' <span style="color:var(--ink-faint)">{html.escape(s["affiliation"])}</span>'
-        parts.append(name)
+            entry += f' <span class="aff">{html.escape(s["affiliation"])}</span>'
+        parts.append(entry)
     return '    <div class="sig-list">' + " · ".join(parts) + "</div>"
 
 
