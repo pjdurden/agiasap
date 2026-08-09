@@ -213,16 +213,17 @@ def render(tpl, rows, meta, sigs, trac, fund, treas) -> str:
 # --------------------------------------------------------- markdown mirror
 
 BLOCK = re.compile(
-    r"<(h1|h2|h3|p|li|caption|blockquote|dt|dd)\b[^>]*>(.*?)</\1>", re.S | re.I
+    r"<(h1|h2|h3|p|li|caption|blockquote|dt|dd|summary)\b[^>]*>(.*?)</\1>", re.S | re.I
 )
 
 
 def to_markdown(page: str, rows, meta) -> str:
     """Derive the plain-text mirror from the rendered page, so the two cannot drift."""
-    article = re.search(r"<header class=\"masthead\">(.*?)</footer>", page, re.S)
+    article = re.search(r"<header class=\"hero\"(.*?)</footer>", page, re.S)
     body = article.group(1) if article else page
-    # The contents list duplicates the section headings; drop it from the mirror.
-    body = re.sub(r"<nav class=\"contents\".*?</nav>", "", body, flags=re.S)
+    # Navigation duplicates the section headings and would otherwise arrive
+    # as a stray bullet list at the top of the mirror.
+    body = re.sub(r"<nav\b.*?</nav>", "", body, flags=re.S)
     # Dateline separators live in CSS ::after, so they are absent from the text.
     body = body.replace("</span><span>", " · ")
     # Pull quotes are <em>, which the block matcher ignores. Promote them.
@@ -230,7 +231,7 @@ def to_markdown(page: str, rows, meta) -> str:
         r"<em class=\"pull\">(.*?)</em>", r"<p>**\1**</p>", body, flags=re.S
     )
 
-    lines = ["# AGI ASAP: A Declaration", ""]
+    lines = ["# AGI ASAP", ""]
     for tag, inner in BLOCK.findall(body):
         tag = tag.lower()
         # Nested <p> inside a blockquote would double up; the blockquote wins.
@@ -258,7 +259,16 @@ def to_markdown(page: str, rows, meta) -> str:
         elif tag == "h3":
             lines += [f"### {text}", ""]
         elif tag == "li":
-            lines += [f"- {text}"]
+            head = re.search(r"<h3[^>]*>(.*?)</h3>", inner, re.S)
+            if head:
+                title = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", head.group(1)))).strip()
+                rest = re.sub(r"<h3[^>]*>.*?</h3>", "", inner, flags=re.S)
+                rest = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", rest))).strip()
+                lines += [f"- **{title}**: {rest}"]
+            else:
+                lines += [f"- {text}"]
+        elif tag == "summary":
+            lines += ["", f"### {text}", ""]
         elif tag == "dt":
             lines += [f"**{text}**  "]
         elif tag == "dd":

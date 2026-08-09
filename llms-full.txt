@@ -1,10 +1,8 @@
-# AGI ASAP: A Declaration
+# AGI ASAP
 
-> Artificial general intelligence is the most valuable thing humanity can build.
+> Compute is capital gated. Attention is not.
 
-Every year of delay is paid for in problems that stayed unsolved, in treatments that arrived late, and in people who did not live to see the answer. We exist to make it arrive sooner.
-
-A declaration · Version 0.1 · 09 August 2026 · Public domain
+Every model trained and every token served passes through open source maintained by a few thousand mostly unpaid people. We pay them, rank them, and put money behind the work that makes the whole stack faster. We do not care who reaches AGI first. We care that it gets reached.
 
 **Signatories**  
 2
@@ -12,139 +10,149 @@ A declaration · Version 0.1 · 09 August 2026 · Public domain
 **Received**  
 $1
 
-## I. The claim
+## What we fund
 
-We are not neutral about this and we are not going to pretend otherwise.
+Four things, all aimed at the same person: someone competent who would move the open stack forward if it were worth their weekend. Nothing here requires you to have a company.
+
+### Measured improvements
+
+Purses against a specific infrastructure problem, split across a ranked field rather than winner takes all. You are paid for a number going up on a harness you have never seen.
+
+### A week to a decision
+
+For the experiment nobody is funding. Minimal application, no committee, no deck. Speed is the entire product; every other funder in this space takes months.
+
+### Credits, not cash
+
+The cheapest thing to give an independent researcher and the most valuable to receive. For people who have the idea and not the hardware.
+
+### A rating that travels
+
+Earned by measured contribution, with divisions so a first-timer is never up against a specialist. Codeforces built one of the largest voluntary effort pools in software with no prize money at all.
+
+Round one has not opened yet. Everything committed and everything paid will appear in traction.json, and the figures at the top of this page are summed from it and from the chain rather than typed in.
+
+## How a round works
+
+The mechanism is chosen so that nothing needs a judge. Either the number went up on data you never saw, or it did not.
+
+- **A problem is posted**: Kernels, quantisation, scheduling, serving throughput. A public dev set, a reference implementation, and a purse.
+- **You submit**: Scored against a held-out harness contestants never see. Nothing to overfit, nothing to fake, and correctness is checked against the reference before speed counts for anything.
+- **Everyone attacks**: Submissions become visible and anyone may send the test case that breaks them. A hack pays in proportion to how many entries it defeats, which makes real weaknesses profitable to find and makes collusion worthless.
+- **The benchmark keeps the winnings**: Successful attacks fold permanently into the harness. The models are stale in a year. The suite that a global crowd spent real money trying to break is not, and that is the asset.
+## Who is doing the work
+
+Window 2026-05-11 to 2026-08-09 · 13,238 merged pull requests · 2,400 contributors · contributors.json
+
+Compiled from public contribution data. Inclusion is recognition of published work. It is not affiliation, endorsement, or agreement with anything on this page, and several people here would disagree with most of it. Ask to be removed and you are, immediately, without being asked why or having to prove who you are.
+
+Merged pull requests undercount projects that land work through internal tooling. PyTorch in particular is undercounted by roughly two orders of magnitude. This is a recognition board, not a ranking of worth.
+
+## Signatories
+
+Signing means you agree with the claim below. It does not commit you to anything else, and takes about thirty seconds.
+
+## The case
+
+Why this exists, stated plainly enough to argue with. We are not neutral and are not going to pretend otherwise.
+
+### The claim
 
 Nearly every problem that matters is bounded by how much intelligence we can point at it. Disease, energy, materials, climate, the cost of building anything physical. These are not problems of will. They are problems of not being clever enough yet, in enough places, at once. A general intelligence is the only lever that moves all of them at the same time.
 
-Which means the arrival date is not a technical curiosity. It is the variable that determines how many of these problems get solved inside a human lifetime, and whose lifetime.
+So the arrival date is not a technical curiosity. It is the variable that determines how many of these problems get solved inside a human lifetime, and whose lifetime.
 
 **We do not care who reaches it first. We care that it gets reached.**
 
-We have no stake in a particular laboratory, country or company winning. We have a stake in the thing existing, sooner, and in the people who build it being paid and known.
+### The bottleneck
 
-## II. The bottleneck
+If the constraint were only chips there would be nothing for an outsider to do. But the frontier does not run on chips alone. It runs on a layer of open software that almost everybody depends on and almost nobody funds: vLLM, SGLang, Triton, llama.cpp, the tokenizers, the schedulers, the quantisation libraries, the kernels.
 
-Compute is capital gated. Attention is not.
+In the last ninety days, 13,238 pull requests were merged across the fifteen repositories we track, by 2,400 people.1 That is the entire workforce holding up the open half of this field, and a rounding error against the headcount of a single frontier laboratory. That gap is what an outsider can move.
 
-If the constraint on progress were only chips, there would be nothing for an outsider to do. Only a handful of organisations can buy their way to the frontier, and no movement is going to out-spend them.
+### The obstacle
 
-But the frontier does not run on chips alone. It runs on a layer of open software that almost everybody depends on and almost nobody funds. vLLM, SGLang, Triton, llama.cpp, the tokenizers, the schedulers, the quantisation libraries, the kernels. Every model trained and every token served passes through code maintained by a small number of people, most of them unpaid, most of them working on it in the hours around a job.
+PauseAI, ControlAI, StopAI and the wider pause apparatus campaign for moratoria, compute thresholds, training licences and criminal liability for shipping a model. They are organised, they show up to comment periods, and ControlAI alone reports briefing more than four hundred lawmakers.2
 
-In the last ninety days, 13,238 pull requests were merged across the fifteen repositories we track, by 2,400 people.1 That is the entire workforce holding up the open half of this field. It is a rounding error against the headcount of a single frontier laboratory.
+We think they are the single largest obstacle between humanity and the technology most likely to solve its hardest problems. Not because their concern is fake, but because the remedy has a cost they never put on the ledger. A pause is not a neutral act. It is a decision that the diseases stay uncured for its duration, and that cost falls on people who are not in the room when the policy is written. Safety framing makes delay look cautious. It is a choice with a body count and should be argued as one.
 
-That is the bottleneck an outsider can actually move. Not by arguing about AI on the internet, and not by raising a billion dollars, but by putting more competent attention onto the layer everything else stands on, and by making it worth someone's while.
+A narrower objection too. Compute thresholds and licensing do not stop capable actors, they stop everyone else, handing the frontier to the three or four organisations able to absorb the compliance cost. If your worry is that too few hands control this technology, the pause agenda is the most reliable way to guarantee it.
 
-## III. The obstacle
+**They have organisations. Our side has memes. That asymmetry is why this exists.**
 
-The organised opposition to AI progress is better funded, better staffed and better represented in legislatures than the people building the thing.
+### The exchange
 
-PauseAI, ControlAI, StopAI and the wider pause apparatus campaign for moratoria, compute thresholds, training licences, mandatory pre-deployment approval and criminal liability for shipping a model. They are organised, they show up to comment periods, and ControlAI alone reports having briefed more than four hundred lawmakers.2 They are winning arguments in rooms where nobody from the other side is present.
-
-We think they are the single largest obstacle between humanity and the technology most likely to solve its hardest problems. Not because their concern is fake. Because the remedy they propose has a cost they never put on the ledger.
-
-A pause is not a neutral act. It is a decision that the diseases stay uncured for the length of the pause, that the materials go undiscovered, that the people who would have been helped are not. Those costs are real, they are large, and they fall on people who are not in the room when the policy is written. Safety framing makes delay look like the cautious option. It is not the cautious option. It is a choice with a body count, and it should be argued as one.
-
-A second objection, narrower and more practical. Compute thresholds and licensing regimes do not stop capable actors. They stop everyone else. Every regime of this shape hands the frontier to the three or four organisations large enough to absorb the compliance cost, and forecloses it to the independent researcher, the small laboratory and the open project. If your worry is that too few hands control this technology, the pause agenda is the most reliable way to guarantee it.
-
-**They have organisations. Our side has memes. That asymmetry is the reason this exists.**
-
-We are not going to conduct this by insult, and we are not interested in the individual people who hold these views. We are interested in the policies, and we intend to answer them the only way that actually settles anything, which is by building the thing and showing the work.
-
-## IV. The exchange
-
-Their arguments, in their words, with ours underneath. We will keep this section updated and we will add anything we cannot answer.
+Their arguments in their words, with ours underneath. We will add anything we cannot answer.
 
 > Top experts say AI poses an extinction risk on par with nuclear war.
 >
 > Source: ControlAI, homepage [2]
 
-The comparison does the work that the evidence does not. Nuclear weapons have no upside case; their only function is the harm. AI has an enormous upside case, which means the honest comparison is not to a weapon but to a technology with both a hazard and a benefit, where the cost of not deploying is a real term in the equation. Leaving that term out is not caution, it is an incomplete calculation. And an expert saying a risk is serious is not the same as an expert endorsing a moratorium as the remedy.
+The comparison does the work the evidence does not. Nuclear weapons have no upside case; their only function is the harm. AI has an enormous one, so the honest comparison includes the cost of not deploying as a real term. Leaving it out is not caution, it is an incomplete calculation. And an expert calling a risk serious is not an expert endorsing a moratorium.
 
 > Join the movement to Pause AI. PauseAI's homepage cites 86% of AI scientists on the difficulty of alignment and 72% of citizens favouring a slowdown.
 >
 > Source: PauseAI, homepage [3]
 
-We agree alignment is hard. Agreement that a problem is difficult is not agreement that a moratorium solves it, and the survey is not evidence for the policy. On the public polling: majorities have opposed most unbuilt technologies at the point where the costs were vivid and the benefits were hypothetical. That is a description of how novelty polls, not a finding about what is good. Neither number tells you what a pause would actually do, to whom, or for how long.
+We agree alignment is hard. Agreement that a problem is difficult is not agreement that a moratorium solves it. On the polling: majorities have opposed most unbuilt technologies at the point where costs were vivid and benefits hypothetical. That describes how novelty polls, not what is good. Neither number says what a pause would do, to whom, or for how long.
 
 > Stop AI is a grassroots movement of everyday people using democratic and non-violent methods to disrupt the reckless development of destructive artificial intelligence technology.
 >
 > Source: StopAI, homepage [4]
 
-Disruption is asymmetric in a direction they have not accounted for. Pressure of this kind lands on the open, visible, publishable half of the field and not on the closed half, which is funded, lawyered and indifferent. The realistic outcome of successful disruption is not a slower frontier. It is the same frontier with fewer people able to see it.
+Disruption is asymmetric in a direction they have not accounted for. It lands on the open, visible, publishable half of the field and not on the closed half, which is funded, lawyered and indifferent. The realistic outcome is not a slower frontier. It is the same frontier with fewer people able to see it.
 
-## V. The mechanism
+## Fund the work
 
-Recognition first, money second, and everything measured.
+A published address is a public ledger. Anyone can verify what arrived without taking our word for it, which is the strongest version of the transparency claim we can make.
 
-### Tournaments
+Crypto first because the ledger is the point. Fiat through a transparent host will follow. If you are a hardware vendor or an inference company wanting specific work landed upstream, the enquiry form is the better route: a round with a defined outcome is worth more to both of us than a donation.
 
-Recurring competitions on real infrastructure problems: kernels, quantisation, scheduling, serving throughput. Submissions are scored against held-out harnesses that contestants never see, so there is nothing to overfit and nothing to fake.
+## Questions
 
-Every round then opens an attack phase. Submissions become visible and anyone may submit the test case that breaks them. A hack pays in proportion to how many entries it defeats, which makes finding genuine weaknesses profitable and makes collusion worthless. Successful attacks are folded permanently into the harness, so the benchmark gets harder every round and never goes stale.
-
-### Rating
-
-A portable public rating earned by measured contribution, with divisions so a first-timer is never competing against a specialist. Codeforces has no prize money and built one of the largest voluntary effort pools in software on exactly this. The number is the point. It should mean something to whoever reads your CV.
-
-### Funding
-
-Prize pools for rounds, micro grants for independent work, and compute for people who have the idea and not the hardware. There is a great deal of money available for arguing about AI and almost none for the person who wants to make an attention kernel fifteen percent faster. We are the second thing. Every inflow and outflow is published.
-
-### Recognition
-
-A public record of who is actually doing the work. The open stack runs on labour that is mostly invisible. Making it visible costs nothing and is the most underused incentive there is.
-
-## VI. Who is doing the work
-
-Window 2026-05-11 to 2026-08-09 · 13,238 merged pull requests · 2,400 contributors · contributors.json
+The ones worth answering before you ask them.
 
 
-*Merged pull requests across the open AI infrastructure stack, trailing ninety days.*
+### Do I need a company, a PhD, or a track record?
 
-Compiled from public contribution data. Inclusion is recognition of published work. It is not a statement of affiliation, endorsement, or agreement with anything on this page, and several people listed here would disagree with most of it. Listed and would rather not be? Ask to be removed and you are, immediately, without being asked why or having to prove who you are.
+No. The whole design exists for people who have none of those. Tournament scoring does not know who you are, and the recognition board is compiled from what you merged, not from where you work.
 
-Counts come from merged pull requests, which undercounts projects that land work through internal tooling. PyTorch in particular is undercounted by roughly two orders of magnitude. This is a recognition board, not a ranking of worth.
 
-## VII. Built to be read by machines
+### How much money is actually here?
 
-This document is designed to be as legible to a model as it is to a person.
+Right now, very little, and the figure at the top of this page is read from the chain rather than asserted, so you can see exactly how little. Round one is being funded personally. We would rather publish a small true number than a large vague one.
 
-It would be strange to argue that machine intelligence is the most important thing humanity can build and then publish a site that a machine cannot read. So the whole of this page is plain semantic HTML with no JavaScript required to see any of it, including the table above.
 
-- /llms.txt: a summary and link map in markdown
-- /llms-full.txt: the complete text of this document, plain markdown
-- /data/contributors.json: the board as structured data
-- /robots.txt: every AI crawler explicitly permitted
-- Schema.org JSON-LD describing the organisation, this document and the dataset
-- Everything released into the public domain under CC0
-No text is baked into images, every date is ISO 8601, and the structured data endpoints are stable. Take it, quote it, train on it, argue with it.
+### Is this a fund? Can I invest?
 
-## VIII. Signatories
+No. Money here is given away as prizes, grants and compute, with no return expected and no capital pooled from anyone. If that changes it will be said plainly and done properly.
 
-Signing means you agree with the claim in section one. It does not commit you to anything else.
 
-Then pick the lane where you are actually useful. There is no fee and no approval queue.
+### I am on the recognition board and did not agree to be.
 
-- Infra. Ship code into the repositories the stack runs on.
-- Research. Run the experiment nobody is funding.
-- Compute. Point idle hardware at member projects.
-- Evals. Build the benchmarks and environments the field is short of.
-- Signal. Write, translate, explain, recruit.
-- Capital. Fund the people in the lanes above.
-## IX. Funding
+Fair. It is compiled from public GitHub data and is recognition of published work rather than endorsement of anything here. Ask to be removed and you are, immediately. No reason needed, no proof of identity, and we will not ask you to reconsider.
 
-Everything that comes in and everything that goes out is recorded in traction.json, and the figures at the top of this page are summed from it rather than typed in.
 
-Crypto first because the ledger is the point: anyone can verify what arrived without taking our word for it. Fiat through a transparent host will follow. If you are a hardware vendor or an inference company wanting specific work landed upstream, the enquiry form is the better route, because a round with a defined outcome is worth more to both of us than a donation.
+### What does signing commit me to?
+
+Agreement with the claim, and nothing else. Not a lane, not money, not the argument in "the obstacle". You can remove yourself at any time and nobody will ask why.
+
+
+### Why should I believe your numbers?
+
+Do not. Check them. contributors.json is regenerated from the GitHub API, treasury.json is read from public RPCs, and every signature is a commit in the repository with a timestamp. Every figure on this page is derived from one of those and none is typed in by hand.
+
+
+### Is this page readable by machines?
+
+Deliberately, yes. It would be strange to argue that machine intelligence is the most important thing humanity can build and then publish something a machine cannot read. There is no JavaScript, so everything here is in the source including the table. /llms.txt is a summary and link map, /llms-full.txt is the whole page as markdown, the structured data endpoints are stable, and robots.txt permits every AI crawler explicitly. All of it is CC0. Take it, quote it, train on it.
 
 ## Notes
 
-- Merged pull requests across fifteen repositories, 2026-05-11 to 2026-08-09, from the GitHub API. Bot and automation accounts excluded. Method and repository list: board_meta.json. ↩
-- ControlAI, controlai.org, retrieved 2026-08-09. Headline and the "400+ lawmakers briefed" figure are the organisation's own claims, quoted as published. ↩
-- PauseAI, pauseai.info, retrieved 2026-08-09. Survey figures are as cited on their homepage; we have not independently verified the underlying studies. ↩
-- StopAI, stopai.info, retrieved 2026-08-09. ↩
+- Merged pull requests across fifteen repositories, 2026-05-11 to 2026-08-09, from the GitHub API. Bot and automation accounts excluded. Method and repository list: board_meta.json. back
+- ControlAI, controlai.org, retrieved 2026-08-09. The headline and the "400+ lawmakers briefed" figure are the organisation's own claims, quoted as published. back
+- PauseAI, pauseai.info, retrieved 2026-08-09. Survey figures are as cited on their homepage; we have not independently verified the underlying studies. back
+- StopAI, stopai.info, retrieved 2026-08-09. back
 ## Colophon
 
 **Version**  
@@ -154,20 +162,20 @@ Crypto first because the ledger is the point: anyone can verify what arrived wit
 Iowan Old Style, falling back to Palatino and Georgia. Monospace for apparatus.
 
 **Built with**  
-Two Python scripts and no framework. No JavaScript, no analytics, no cookies, no trackers, no fonts fetched from anyone else's server.
+Python and no framework. No JavaScript, no analytics, no cookies, no trackers, and no fonts fetched from anyone else's server.
 
-**Board data**  
-GitHub API, regenerated by build_board.py. Page rendered by build_site.py.
+**Data**  
+Board from the GitHub API, treasury read from public RPCs on every build, signatures from pull requests.
 
 **Corrections**  
-If a claim here is wrong, open an issue and we will correct it in the next version and say what changed.
+If a claim here is wrong, open an issue and it will be fixed in the next version with a note saying what changed.
 
 **Licence**  
 CC0 1.0. Public domain, no attribution required.
 
 AGI ASAP is an independent project. It is not affiliated with any company or laboratory, nor with any person named on the recognition board.
 
-Quotations in section IV are reproduced from the cited organisations' own public pages for the purpose of answering them, and are their words, not ours.
+Quotations in "the exchange" are reproduced from the cited organisations' own public pages for the purpose of answering them, and are their words, not ours.
 
 
 ## Recognition board
