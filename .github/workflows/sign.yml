@@ -2,7 +2,10 @@ name: Signature request
 
 on:
   issues:
-    types: [opened]
+    # 'labeled' matters: issue forms silently drop labels that do not exist in
+    # the repository, so a signature can arrive unlabelled and be skipped.
+    # Labelling it afterwards then re-fires this workflow and recovers it.
+    types: [opened, labeled]
 
 permissions:
   contents: write
@@ -11,7 +14,11 @@ permissions:
 
 jobs:
   open-pr:
-    if: contains(github.event.issue.labels.*.name, 'signature')
+    # Title is a fallback for the same reason. Both paths are validated
+    # identically, so a looser trigger costs nothing.
+    if: >
+      contains(github.event.issue.labels.*.name, 'signature') ||
+      github.event.issue.title == 'sign'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
