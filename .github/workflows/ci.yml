@@ -23,6 +23,9 @@ jobs:
       - name: Validate data files
         run: python3 validate_data.py
 
+      - name: Notification tests
+        run: python3 test_notify.py
+
       # The anti-impersonation check. Anyone may open a PR, but you may only add
       # yourself: a newly added signature file must be named for the PR author.
       # Signing as someone else therefore requires their GitHub account.
