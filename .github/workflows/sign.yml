@@ -2,15 +2,22 @@ name: Signature request
 
 on:
   issues:
-    # 'labeled' matters: issue forms silently drop labels that do not exist in
-    # the repository, so a signature can arrive unlabelled and be skipped.
-    # Labelling it afterwards then re-fires this workflow and recovers it.
-    types: [opened, labeled]
+    # Only 'opened'. The form applies the label at creation, so listening for
+    # 'labeled' as well fired this twice for every signature and posted the
+    # confirmation comment twice. The title fallback below covers the case
+    # 'labeled' was originally added for.
+    types: [opened]
 
 permissions:
   contents: write
   pull-requests: write
   issues: write
+
+# Serialise per issue so a re-open or manual re-run queues behind the first
+# attempt and sees its result, rather than racing it.
+concurrency:
+  group: sign-${{ github.event.issue.number }}
+  cancel-in-progress: false
 
 jobs:
   open-pr:
@@ -114,6 +121,7 @@ jobs:
         run: python3 validate_data.py
 
       - name: Open the pull request
+        id: pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HANDLE: ${{ steps.sig.outputs.handle }}
@@ -129,11 +137,14 @@ jobs:
           # It is bot-owned and named for one handle, so nothing else can be lost.
           git push -f -u origin "$BRANCH"
 
-          # An open PR from an earlier retry means there is nothing left to do.
+          # An open PR from an earlier attempt means there is nothing left to do.
+          # Record that so the comment step stays quiet instead of thanking them twice.
           if gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' | grep -q .; then
             echo "a pull request for $BRANCH is already open"
+            echo "already=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          echo "already=false" >> "$GITHUB_OUTPUT"
 
           gh pr create \
             --title "sign: @${HANDLE}" \
@@ -145,6 +156,7 @@ jobs:
             --base main --head "$BRANCH"
 
       - name: Tell them what happened
+        if: steps.pr.outputs.already != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
