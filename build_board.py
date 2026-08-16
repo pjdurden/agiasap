@@ -95,16 +95,40 @@ def gh_api(path: str, attempt: int = 0) -> dict:
 
 def check_auth(tok: str) -> None:
     """Fail fast and legibly rather than tracebacking on the first search."""
+    # /rate_limit, not /user: under Actions the GITHUB_TOKEN is an app
+    # installation token with no user behind it, so /user is forbidden to it by
+    # construction. /rate_limit answers for every credential type, and it also
+    # reports the search quota, which is the budget this script actually spends.
     try:
-        who = get("user", tok)
+        limits = get("rate_limit", tok)
     except urllib.error.HTTPError as e:
-        if e.code == 401:
+        if e.code in (401, 403):
             sys.exit(
-                "GitHub rejected GITHUB_TOKEN (401). It is expired, revoked, or a placeholder.\n"
+                f"GitHub rejected GITHUB_TOKEN ({e.code}: {e.reason}). "
+                "It is expired, revoked, a placeholder, or lacks the scope.\n"
                 "Unset it to fall back to the gh CLI: unset GITHUB_TOKEN"
             )
         raise
-    print(f"authenticated as {who.get('login')}", file=sys.stderr)
+    quota = limits.get("resources", {}).get("search", {})
+    print(
+        f"authenticated; search quota {quota.get('remaining')}/{quota.get('limit')}",
+        file=sys.stderr,
+    )
+
+
+def is_throttled(e: urllib.error.HTTPError) -> bool:
+    """
+    Tell a throttle apart from a refusal; GitHub returns 403 for both.
+
+    A primary limit zeroes x-ratelimit-remaining, a secondary one sets
+    retry-after. A permissions 403 carries neither, and retrying it just burns
+    eight minutes of backoff before failing with the same error.
+    """
+    if e.code == 429:
+        return True
+    if e.headers.get("retry-after"):
+        return True
+    return e.headers.get("x-ratelimit-remaining") == "0"
 
 
 def get(path: str, tok: str, attempt: int = 0) -> dict:
@@ -124,12 +148,11 @@ def get(path: str, tok: str, attempt: int = 0) -> dict:
         with urllib.request.urlopen(req, timeout=30) as resp:
             return json.load(resp)
     except urllib.error.HTTPError as e:
-        # 403 here is nearly always the 30 req/min search limit rather than auth.
-        if e.code in (403, 429) and attempt < 5:
+        if is_throttled(e) and attempt < 5:
             wait = 2 ** attempt * 15
             print(f"  rate limited, sleeping {wait}s", file=sys.stderr)
             time.sleep(wait)
-            return get(url, tok, attempt + 1)
+            return get(path, tok, attempt + 1)
         raise
 
 
