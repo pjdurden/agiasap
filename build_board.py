@@ -16,6 +16,7 @@ written, so removals survive regeneration.
 import argparse
 import collections
 import datetime as dt
+import http.client
 import json
 import os
 import pathlib
@@ -151,6 +152,17 @@ def get(path: str, tok: str, attempt: int = 0) -> dict:
         if is_throttled(e) and attempt < 5:
             wait = 2 ** attempt * 15
             print(f"  rate limited, sleeping {wait}s", file=sys.stderr)
+            time.sleep(wait)
+            return get(path, tok, attempt + 1)
+        raise
+    except (OSError, http.client.HTTPException) as e:
+        # A dropped connection is not an answer, and GitHub drops a few over the
+        # several hundred calls this sweep makes. Without this the run threw
+        # away ten minutes and thirteen repos over one late blip.
+        # HTTPError is an OSError too, so it must stay caught above this.
+        if attempt < 5:
+            wait = 2 ** attempt * 15
+            print(f"  connection lost ({type(e).__name__}), sleeping {wait}s", file=sys.stderr)
             time.sleep(wait)
             return get(path, tok, attempt + 1)
         raise
