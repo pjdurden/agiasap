@@ -1,35 +1,35 @@
 [
   {
     "login": "mickqian",
-    "merged": 314,
+    "merged": 319,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "hnyls2002",
-    "merged": 300,
+    "merged": 302,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "BBuf",
-    "merged": 197,
+    "merged": 200,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "ch-wan",
-    "merged": 167,
+    "merged": 172,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "ngxson",
-    "merged": 139,
+    "merged": 140,
     "repos": [
       "llama.cpp"
     ]
@@ -43,7 +43,7 @@
   },
   {
     "login": "mmangkad",
-    "merged": 130,
+    "merged": 132,
     "repos": [
       "sglang",
       "vllm"
@@ -57,20 +57,6 @@
     ]
   },
   {
-    "login": "ggerganov",
-    "merged": 118,
-    "repos": [
-      "llama.cpp"
-    ]
-  },
-  {
-    "login": "ydshieh",
-    "merged": 117,
-    "repos": [
-      "transformers"
-    ]
-  },
-  {
     "login": "dstrodtman",
     "merged": 117,
     "repos": [
@@ -78,38 +64,59 @@
     ]
   },
   {
+    "login": "ydshieh",
+    "merged": 116,
+    "repos": [
+      "transformers"
+    ]
+  },
+  {
+    "login": "ggerganov",
+    "merged": 114,
+    "repos": [
+      "llama.cpp"
+    ]
+  },
+  {
     "login": "Fridge003",
-    "merged": 107,
+    "merged": 108,
     "repos": [
       "sglang"
-    ]
-  },
-  {
-    "login": "fzyzcjy",
-    "merged": 107,
-    "repos": [
-      "sglang"
-    ]
-  },
-  {
-    "login": "yewentao256",
-    "merged": 103,
-    "repos": [
-      "vllm"
     ]
   },
   {
     "login": "njhill",
-    "merged": 103,
+    "merged": 106,
     "repos": [
       "vllm"
     ]
   },
   {
+    "login": "fzyzcjy",
+    "merged": 106,
+    "repos": [
+      "sglang"
+    ]
+  },
+  {
     "login": "elliot-barn",
-    "merged": 101,
+    "merged": 103,
     "repos": [
       "ray"
+    ]
+  },
+  {
+    "login": "yewentao256",
+    "merged": 102,
+    "repos": [
+      "vllm"
+    ]
+  },
+  {
+    "login": "brnguyen2",
+    "merged": 95,
+    "repos": [
+      "TensorRT-LLM"
     ]
   },
   {
@@ -118,13 +125,6 @@
     "repos": [
       "transformers",
       "vllm"
-    ]
-  },
-  {
-    "login": "brnguyen2",
-    "merged": 92,
-    "repos": [
-      "TensorRT-LLM"
     ]
   },
   {
@@ -149,13 +149,6 @@
     ]
   },
   {
-    "login": "ServeurpersoCom",
-    "merged": 76,
-    "repos": [
-      "llama.cpp"
-    ]
-  },
-  {
     "login": "Kangyan-Zhou",
     "merged": 75,
     "repos": [
@@ -163,10 +156,24 @@
     ]
   },
   {
+    "login": "ServeurpersoCom",
+    "merged": 74,
+    "repos": [
+      "llama.cpp"
+    ]
+  },
+  {
     "login": "kpham-sgl",
-    "merged": 70,
+    "merged": 71,
     "repos": [
       "sglang"
+    ]
+  },
+  {
+    "login": "BugenZhao",
+    "merged": 69,
+    "repos": [
+      "vllm"
     ]
   },
   {
@@ -181,13 +188,6 @@
     "merged": 69,
     "repos": [
       "sglang"
-    ]
-  },
-  {
-    "login": "BugenZhao",
-    "merged": 68,
-    "repos": [
-      "vllm"
     ]
   },
   {
@@ -206,7 +206,7 @@
   },
   {
     "login": "chienchunhung",
-    "merged": 62,
+    "merged": 61,
     "repos": [
       "TensorRT-LLM"
     ]
@@ -221,14 +221,14 @@
   },
   {
     "login": "yctseng0211",
-    "merged": 55,
+    "merged": 56,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "brb-nv",
-    "merged": 54,
+    "merged": 53,
     "repos": [
       "TensorRT-LLM"
     ]
@@ -250,25 +250,18 @@
     ]
   },
   {
+    "login": "taneem-ibrahim",
+    "merged": 50,
+    "repos": [
+      "vllm"
+    ]
+  },
+  {
     "login": "ArthurZucker",
     "merged": 50,
     "repos": [
       "tokenizers",
       "transformers"
-    ]
-  },
-  {
-    "login": "WoosukKwon",
-    "merged": 49,
-    "repos": [
-      "vllm"
-    ]
-  },
-  {
-    "login": "taneem-ibrahim",
-    "merged": 49,
-    "repos": [
-      "vllm"
     ]
   },
   {
@@ -284,6 +277,13 @@
     "repos": [
       "sglang",
       "transformers",
+      "vllm"
+    ]
+  },
+  {
+    "login": "WoosukKwon",
+    "merged": 48,
+    "repos": [
       "vllm"
     ]
   },
