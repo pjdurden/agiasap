@@ -1,9 +1,9 @@
 {
-  "since": "2026-06-04",
-  "until": "2026-09-02",
+  "since": "2026-06-05",
+  "until": "2026-09-03",
   "days": 90,
-  "total_prs": 14045,
-  "total_people": 2531,
+  "total_prs": 14076,
+  "total_people": 2526,
   "repos": [
     "vllm-project/vllm",
     "sgl-project/sglang",
