@@ -1,7 +1,7 @@
 [
   {
     "login": "hnyls2002",
-    "merged": 317,
+    "merged": 313,
     "repos": [
       "sglang"
     ]
@@ -15,28 +15,21 @@
   },
   {
     "login": "BBuf",
-    "merged": 221,
+    "merged": 222,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "ch-wan",
-    "merged": 176,
+    "merged": 175,
     "repos": [
       "sglang"
     ]
   },
   {
-    "login": "ngxson",
-    "merged": 142,
-    "repos": [
-      "llama.cpp"
-    ]
-  },
-  {
     "login": "AndreasKaratzas",
-    "merged": 141,
+    "merged": 144,
     "repos": [
       "vllm"
     ]
@@ -50,31 +43,45 @@
     ]
   },
   {
-    "login": "merrymercy",
-    "merged": 131,
+    "login": "ngxson",
+    "merged": 141,
     "repos": [
-      "sglang"
+      "llama.cpp"
     ]
   },
   {
     "login": "dstrodtman",
-    "merged": 126,
+    "merged": 134,
     "repos": [
       "ray"
     ]
   },
   {
+    "login": "merrymercy",
+    "merged": 133,
+    "repos": [
+      "sglang"
+    ]
+  },
+  {
     "login": "Fridge003",
-    "merged": 114,
+    "merged": 120,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "ggerganov",
-    "merged": 111,
+    "merged": 113,
     "repos": [
       "llama.cpp"
+    ]
+  },
+  {
+    "login": "njhill",
+    "merged": 106,
+    "repos": [
+      "vllm"
     ]
   },
   {
@@ -82,13 +89,6 @@
     "merged": 106,
     "repos": [
       "transformers"
-    ]
-  },
-  {
-    "login": "njhill",
-    "merged": 105,
-    "repos": [
-      "vllm"
     ]
   },
   {
@@ -114,7 +114,7 @@
   },
   {
     "login": "hmellor",
-    "merged": 92,
+    "merged": 93,
     "repos": [
       "transformers",
       "vllm"
@@ -122,16 +122,16 @@
   },
   {
     "login": "JustinTong0323",
-    "merged": 86,
+    "merged": 88,
     "repos": [
       "sglang"
     ]
   },
   {
-    "login": "fzyzcjy",
-    "merged": 82,
+    "login": "mgoin",
+    "merged": 81,
     "repos": [
-      "sglang"
+      "vllm"
     ]
   },
   {
@@ -143,17 +143,17 @@
     ]
   },
   {
-    "login": "mgoin",
-    "merged": 80,
-    "repos": [
-      "vllm"
-    ]
-  },
-  {
     "login": "ServeurpersoCom",
     "merged": 78,
     "repos": [
       "llama.cpp"
+    ]
+  },
+  {
+    "login": "fzyzcjy",
+    "merged": 77,
+    "repos": [
+      "sglang"
     ]
   },
   {
@@ -165,7 +165,7 @@
   },
   {
     "login": "jeffniu-openai",
-    "merged": 73,
+    "merged": 74,
     "repos": [
       "triton"
     ]
@@ -178,15 +178,15 @@
     ]
   },
   {
-    "login": "michaelzhang-ai",
-    "merged": 70,
+    "login": "kpham-sgl",
+    "merged": 71,
     "repos": [
       "sglang"
     ]
   },
   {
-    "login": "kpham-sgl",
-    "merged": 68,
+    "login": "michaelzhang-ai",
+    "merged": 70,
     "repos": [
       "sglang"
     ]
@@ -199,6 +199,13 @@
     ]
   },
   {
+    "login": "chienchunhung",
+    "merged": 64,
+    "repos": [
+      "TensorRT-LLM"
+    ]
+  },
+  {
     "login": "zijiexia",
     "merged": 63,
     "repos": [
@@ -206,10 +213,24 @@
     ]
   },
   {
-    "login": "chienchunhung",
-    "merged": 63,
+    "login": "YAMY1234",
+    "merged": 60,
     "repos": [
-      "TensorRT-LLM"
+      "sglang"
+    ]
+  },
+  {
+    "login": "taneem-ibrahim",
+    "merged": 58,
+    "repos": [
+      "vllm"
+    ]
+  },
+  {
+    "login": "ispobock",
+    "merged": 58,
+    "repos": [
+      "sglang"
     ]
   },
   {
@@ -220,29 +241,8 @@
     ]
   },
   {
-    "login": "YAMY1234",
-    "merged": 57,
-    "repos": [
-      "sglang"
-    ]
-  },
-  {
-    "login": "ispobock",
-    "merged": 57,
-    "repos": [
-      "sglang"
-    ]
-  },
-  {
-    "login": "taneem-ibrahim",
-    "merged": 56,
-    "repos": [
-      "vllm"
-    ]
-  },
-  {
     "login": "brb-nv",
-    "merged": 54,
+    "merged": 56,
     "repos": [
       "TensorRT-LLM"
     ]
@@ -270,17 +270,17 @@
     ]
   },
   {
-    "login": "CISC",
-    "merged": 50,
-    "repos": [
-      "llama.cpp"
-    ]
-  },
-  {
     "login": "pytorchbot",
     "merged": 49,
     "repos": [
       "pytorch"
+    ]
+  },
+  {
+    "login": "CISC",
+    "merged": 49,
+    "repos": [
+      "llama.cpp"
     ]
   },
   {
@@ -308,13 +308,6 @@
     ]
   },
   {
-    "login": "lezcano",
-    "merged": 45,
-    "repos": [
-      "triton"
-    ]
-  },
-  {
     "login": "WoosukKwon",
     "merged": 44,
     "repos": [
@@ -330,6 +323,13 @@
     ]
   },
   {
+    "login": "lezcano",
+    "merged": 43,
+    "repos": [
+      "triton"
+    ]
+  },
+  {
     "login": "allozaur",
     "merged": 43,
     "repos": [
@@ -337,10 +337,18 @@
     ]
   },
   {
-    "login": "Qiaolin-Yu",
+    "login": "zucchini-nlp",
     "merged": 42,
     "repos": [
-      "sglang"
+      "transformers",
+      "vllm"
+    ]
+  },
+  {
+    "login": "tarekziade",
+    "merged": 42,
+    "repos": [
+      "transformers"
     ]
   },
   {
@@ -348,13 +356,6 @@
     "merged": 42,
     "repos": [
       "TensorRT-LLM"
-    ]
-  },
-  {
-    "login": "stevhliu",
-    "merged": 41,
-    "repos": [
-      "transformers"
     ]
   }
 ]
