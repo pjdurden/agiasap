@@ -1,28 +1,28 @@
 [
   {
     "login": "mickqian",
-    "merged": 361,
+    "merged": 375,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "hnyls2002",
-    "merged": 331,
+    "merged": 335,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "ch-wan",
-    "merged": 285,
+    "merged": 293,
     "repos": [
       "sglang"
     ]
   },
   {
     "login": "BBuf",
-    "merged": 229,
+    "merged": 232,
     "repos": [
       "sglang"
     ]
@@ -57,7 +57,7 @@
   },
   {
     "login": "mmangkad",
-    "merged": 150,
+    "merged": 148,
     "repos": [
       "sglang",
       "vllm"
@@ -101,34 +101,34 @@
   },
   {
     "login": "njhill",
-    "merged": 95,
-    "repos": [
-      "vllm"
-    ]
-  },
-  {
-    "login": "merrymercy",
-    "merged": 93,
-    "repos": [
-      "sglang"
-    ]
-  },
-  {
-    "login": "lezcano",
-    "merged": 89,
-    "repos": [
-      "triton"
-    ]
-  },
-  {
-    "login": "mgoin",
-    "merged": 88,
+    "merged": 96,
     "repos": [
       "vllm"
     ]
   },
   {
     "login": "yewentao256",
+    "merged": 91,
+    "repos": [
+      "vllm"
+    ]
+  },
+  {
+    "login": "merrymercy",
+    "merged": 91,
+    "repos": [
+      "sglang"
+    ]
+  },
+  {
+    "login": "lezcano",
+    "merged": 90,
+    "repos": [
+      "triton"
+    ]
+  },
+  {
+    "login": "mgoin",
     "merged": 88,
     "repos": [
       "vllm"
@@ -150,17 +150,17 @@
     ]
   },
   {
-    "login": "BugenZhao",
-    "merged": 80,
+    "login": "alphabetc1",
+    "merged": 81,
     "repos": [
-      "vllm"
+      "sglang"
     ]
   },
   {
-    "login": "alphabetc1",
-    "merged": 76,
+    "login": "BugenZhao",
+    "merged": 79,
     "repos": [
-      "sglang"
+      "vllm"
     ]
   },
   {
@@ -207,7 +207,7 @@
   },
   {
     "login": "kpham-sgl",
-    "merged": 65,
+    "merged": 67,
     "repos": [
       "sglang"
     ]
@@ -255,6 +255,13 @@
     ]
   },
   {
+    "login": "ShangmingCai",
+    "merged": 59,
+    "repos": [
+      "sglang"
+    ]
+  },
+  {
     "login": "JustinTong0323",
     "merged": 59,
     "repos": [
@@ -266,13 +273,6 @@
     "merged": 59,
     "repos": [
       "TensorRT-LLM"
-    ]
-  },
-  {
-    "login": "ShangmingCai",
-    "merged": 58,
-    "repos": [
-      "sglang"
     ]
   },
   {
